@@ -295,7 +295,6 @@ public class MetodeOBE {
                 matriks.data[i][j] = scanner.nextDouble();
             }
         }
-        scanner.close();
     }
 
     public static void cetakMatriks(Matrix matriks){
@@ -305,6 +304,13 @@ public class MetodeOBE {
                 System.out.print(" ");
             }
             System.out.println();    
+        }
+    }
+
+    public static void bacaArray(double[] soal){
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < soal.length; i++) {
+            soal[i] = sc.nextDouble();
         }
     }
 
