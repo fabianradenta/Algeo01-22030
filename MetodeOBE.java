@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class MetodeOBE {
 
     public static void tukarBaris(Matrix matriks, int baris1, int baris2){
+    // I.S. Matriks terdefinisi dan memiliki baris yang ingin ditukar
+    // F.S. Baris pada matriks sudah ditukar
         for (int i = 0; i < matriks.getColumns(); i++) {
             double temp = matriks.data[baris1][i];
             matriks.data[baris1][i] = matriks.data[baris2][i];
@@ -11,27 +13,33 @@ public class MetodeOBE {
     }
 
     public static void kaliKonstan(Matrix matriks, double koef, int baris){
+    // I.S. Matriks terdefinisi dan memiliki baris yang ingin dikali 1/koef
+    // F.S. Menghasilkan baris dengan 1 Utama
         for (int i = baris; i < matriks.getColumns(); i++) {
             matriks.data[baris][i] = matriks.data[baris][i]/koef;    
         }
     }
 
     public static void operasiBaris(Matrix matriks, double koef, int baris1, int baris2){
+    // I.S. Matriks terdefinisi dan memiliki baris yang ingin dioperasikan dengan koefisien tertentu
+    // F.S. Baris sudah dioperasikan
         for (int i = 0; i < matriks.getColumns(); i++) {
             matriks.data[baris2][i] = matriks.data[baris2][i]-koef*matriks.data[baris1][i];
         } 
     }
 
     public static void matriksElimGauss(Matrix matriks) {
+    // I.S. Matriks terdefinisi
+    // F.S. Matriks diubah menjadi matriks eselon baris
         int idx1UtamaBaris=0;
-        // int idx1UtamaKolom=0;
-        
         for (int i = 0; i < matriks.getColumns(); i++) {
             
             if (idx1UtamaBaris == matriks.getRows()) {
+            // jika index baris terakhir sudah mendapatkan 1 utama
                 break;
             }
-
+ 
+        // Algoritma mencari 1 utama tiap baris
             int j = idx1UtamaBaris;
             while (j<matriks.getRows() && matriks.data[j][i] == 0) {
                 j++;
@@ -46,14 +54,18 @@ public class MetodeOBE {
             for (int k = idx1UtamaBaris+1; k < matriks.getRows(); k++) {
                 double koef = matriks.data[k][i];
                 operasiBaris(matriks, koef, idx1UtamaBaris, k);
-            }    
+            }
+
             if (j != matriks.getRows()) {
+            // jika kolom j memiliki 1 utama atau tidak seluruhnya 0
                 idx1UtamaBaris++;
             }
         }
     }
 
     public static double[] subtitusiMundur(Matrix matriks){
+    // I.S. Matriks terdefinisi dan diharapkan sudah melewati prosedur eliminasi gauss
+    // F.S. Mengembalikan array berisi solusi SPL
         double[] solusi = new double[matriks.getRows()];
         for (int i = matriks.getRows()-1; i >= 0; i--) {
             solusi[i] = matriks.data[i][matriks.getColumns()-1];
@@ -65,8 +77,12 @@ public class MetodeOBE {
     }
 
     public static void matriksElimGaussJordan(Matrix matriks){
-        int idx1UtamaBaris = matriks.getRows() - 1;
-        int idx1UtamaKolom = matriks.getColumns() - 1;
+    // I.S. Matriks terdefinisi
+    // F.S. Matriks diubah menjadi matriks eselon baris tereduksi
+        int idx1UtamaBaris = matriks.getLastIdxRow();
+        int idx1UtamaKolom = matriks.getLastIdxCol();
+
+    // Algoritma Eliminasi Gauss Jordan
         matriksElimGauss(matriks);
         for (int i = idx1UtamaBaris; i > -1; i--) {
             int j = 0;
@@ -85,6 +101,8 @@ public class MetodeOBE {
     }
 
     public static double[] solusiGaussJordan(Matrix matriks){
+    // I.S. Matriks terdefinisi dan diharapkan sudah melewati prosedur Eliminasi Gauss Jordan
+    // F.S. Mengembalikan array berisi solusi SPL
         double[] solusi = new double[matriks.getRows()];
         for (int i = 0; i < matriks.getRows(); i++) {
             solusi[i] = matriks.data[i][matriks.getColumns()-1];
@@ -93,10 +111,13 @@ public class MetodeOBE {
     }
 
     public static double determinanOBE(Matrix matriks){
+    // Prekondisi : Matriks persegi
+    // I.S. Matriks terdefinisi
+    // F.S. Mengembalikan nilai determinan suatu matriks persegi
         int jmlTukar=0;
         int idx1UtamaBaris=0;
-        // int idx1UtamaKolom=0;
-        
+    
+    // Algoritma mirip Eliminasi Gauss
         for (int i = 0; i < matriks.getColumns(); i++) {
             if (idx1UtamaBaris == matriks.getRows()) {
                 break;
@@ -121,6 +142,7 @@ public class MetodeOBE {
             }
         }
 
+    // Algoritma untuk mendapatkan determinan
         double det = 1;
         for (int i = 0; i < matriks.getRows() ; i++) {
             det = det*matriks.data[i][i];
@@ -130,6 +152,10 @@ public class MetodeOBE {
     }
 
     public static Matrix balikanOBE(Matrix matriks){
+    // Prekondisi : Matriks persegi
+    // I.S. Matriks terdefinisi
+    // F.S. Mengembalikan matriks balikan (invers) dari suatu matriks persegi
+    // Algoritma matriks invers dengan Eliminasi Gauss Jordan
         Matrix matriksbalikan = new Matrix(matriks.getRows(), 2*matriks.getColumns());
         for (int i = 0; i < matriks.getRows(); i++) {
             for (int j = 0; j < matriks.getColumns() ; j++) {
@@ -153,6 +179,8 @@ public class MetodeOBE {
     }
     
     public static void gaussSPL(Matrix matriks){
+    // I.S. Matriks augmented terdefinisi
+    // F.S. Mencetak solusi matriks augmented ke layar
         double det;
         double[] solusi;
         Matrix cekmatriks = new Matrix(matriks.getRows(), matriks.getColumns()-1);
@@ -163,11 +191,12 @@ public class MetodeOBE {
         }
         det = determinanOBE(cekmatriks);
         if (matriks.getRows() == matriks.getColumns()-1 && det != 0) {
+        // Matriks augmented memiliki solusi unik
             matriksElimGauss(matriks);
             solusi = subtitusiMundur(matriks);
             cetakSolusi(solusi);
         } else {
-            System.out.println("TIDAK KONSISTEN");
+        // Matriks singular
             boolean adaSolusi = true;
             matriksElimGaussJordan(matriks);
             int i=matriks.getRows()-1;
@@ -199,7 +228,7 @@ public class MetodeOBE {
         det = determinanOBE(cekmatriks);
         if (matriks.getRows() == matriks.getColumns() && det != 0) {
             matriksElimGaussJordan(matriks);
-            cetakMatriks(matriks);
+            //matriks.displayMatrix();
             solusi = solusiGaussJordan(matriks);
             cetakSolusi(solusi);
         } else {
@@ -236,15 +265,9 @@ public class MetodeOBE {
         }
     }
 
-    public static int satupertamakolom(Matrix matriks, int i){
-        int j = 0;
-        while (j<matriks.getColumns()-1 && matriks.data[i][j]==0 ) {
-            j++;
-        }
-        return j;
-    }
-
     public static boolean cekAda1Utama(Matrix matriks, int i){
+    // I.S. Matriks terdefinisi dan baris i terdefinisi
+    // F.S. Mengembalikan true jika baris i memiliki 1 utama
         int j = 0;
         while (j<matriks.getColumns()-1 && matriks.data[i][j]==0 ) {
             j++;
@@ -256,7 +279,21 @@ public class MetodeOBE {
         }
     }
 
+    public static int satupertamakolom(Matrix matriks, int i){
+    // Prekondisi : baris i memiliki 1 utama
+    // I.S. Matriks terdefinisi dan baris i terdefinisi
+    // F.S. Mengembalikan indeks 1 Utama pada baris i
+        int j = 0;
+        while (j<matriks.getColumns()-1 && matriks.data[i][j]==0 ) {
+            j++;
+        }
+        return j;
+    }
+
+
     public static void parametrik(Matrix matriks){
+    // I.S. Matriks singular terdefinisi
+    // F.S. Mencetak persamaan parametrik ke layar
         double[] idksolusi = new double[matriks.getColumns()-1];
         for (int i = 0; i < matriks.getRows(); i++) {
             if (cekAda1Utama(matriks, i)){
@@ -288,26 +325,9 @@ public class MetodeOBE {
         }
     }
 
-    public static void readMatrix(Matrix matriks){
-        Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < matriks.getRows(); i++) {
-            for (int j = 0; j < matriks.getColumns(); j++) {
-                matriks.data[i][j] = scanner.nextDouble();
-            }
-        }
-    }
-
-    public static void cetakMatriks(Matrix matriks){
-        for (int i = 0; i < matriks.getRows(); i++) {
-            for (int j = 0; j < matriks.getColumns(); j++) {
-                System.out.print(matriks.data[i][j]);
-                System.out.print(" ");
-            }
-            System.out.println();    
-        }
-    }
-
     public static void bacaArray(double[] soal){
+    // I.S. Sembarang
+    // F.S. Telah membaca array
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < soal.length; i++) {
             soal[i] = sc.nextDouble();

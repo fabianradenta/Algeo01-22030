@@ -1,12 +1,15 @@
 import java.util.Scanner;
 
 public class BicubicSplineInterpolation {
-    public static void matriksBicubicSpline(Matrix mSoal){
+    public static double matriksBicubicSpline(Matrix mSoal){
         // int nbaris = 4;
         // int nkolom = 4;
         // Matrix mSoal = new Matrix(nbaris, nkolom);
         // System.out.println();
         // mSoal.readMatrix();
+    // Prekondisi
+    // I.S. Matriks mSoal terdefinisi
+    // F.S. mengembalikan hasil interpolasi bicubic spline
         Scanner sc = new Scanner(System.in);
         double xSoal = sc.nextDouble();
         double ySoal = sc.nextDouble();
@@ -16,7 +19,7 @@ public class BicubicSplineInterpolation {
                 mSoalBicubic.data[i + j*4][0] = mSoal.data[i][j]; 
             }
         }
-        MetodeOBE.cetakMatriks(mSoalBicubic);
+        //MetodeOBE.cetakMatriks(mSoalBicubic);
         Matrix mBicubic = new Matrix(4*mSoal.getRows(),4*mSoal.getColumns());
 
         for (int y = 0; y < 2; y++) {
@@ -49,8 +52,12 @@ public class BicubicSplineInterpolation {
         double hasil = solusiBicubic(invers, xSoal, ySoal);
         //System.out.println("hahahaha");
         System.out.println(hasil);
+        return hasil;
     }
+
     public static void barisBicubic(Matrix matriks, int x, int y){
+    // I.S. Matriks, nilai x, nilai y terdefinisi
+    // F.S. Membuat baris yang berisi sigma aij * x^i * y^j 
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
                 matriks.data[x+y*2][i + j*4] = Math.pow(x, i)*Math.pow(y,j); 
@@ -59,6 +66,8 @@ public class BicubicSplineInterpolation {
     }
 
     public static void barisBicubicTurunanX(Matrix matriks, int x, int y){
+    // I.S. Matriks, nilai x, nilai y terdefinisi
+    // F.S. Membuat baris yang berisi turunan x dari sigma aij * x^i * y^j 
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
                 if (i != 0) {
@@ -69,7 +78,10 @@ public class BicubicSplineInterpolation {
             }
         }
     }
+
     public static void barisBicubicTurunanY(Matrix matriks, int x, int y){
+    // I.S. Matriks, nilai x, nilai y terdefinisi
+    // F.S. Membuat baris yang berisi turunan y dari sigma aij * x^i * y^j 
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
                 if (j != 0) {
@@ -80,7 +92,10 @@ public class BicubicSplineInterpolation {
             }
         }    
     }
+    
     public static void barisBicubicTurunanXY(Matrix matriks, int x, int y){
+    // I.S. Matriks, nilai x, nilai y terdefinisi
+    // F.S. Membuat baris yang berisi turunan xy dari sigma aij * x^i * y^j 
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
                 if (i != 0 && j != 0) {
@@ -93,6 +108,8 @@ public class BicubicSplineInterpolation {
     }
 
     public static double solusiBicubic(Matrix matriks, double x, double y){
+    // I.S. Matriks, nilai x, nilai y terdefinisi
+    // F.S. Mengembalikan nilai interpolasi bicubic spline
         double sum = 0;
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
