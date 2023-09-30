@@ -3,13 +3,13 @@ public class Kofaktor {
         double det = 0;
 
         // Basis
-        if (getRows(m) == 1 && getCols(m) == 1) {
+        if (m.getRows == 1 && m.getColumns == 1) {
             det = m.data[0][0];
         }
         // Rekurens
         else {
             int i = 0;
-            for (int j = 0; j < getCols(m); j++) {
+            for (int j = 0; j < m.getColumns; j++) {
                 det += (m.data[i][j] * getKofaktor(m, i, j));
 
             }
@@ -19,18 +19,18 @@ public class Kofaktor {
 
 
     public static double getKofaktor(Matrix m, int p, int q) {
-        Matrix newMatrix = new Matrix(m.cols - 1, m.rows - 1);    
+        Matrix newMatrix = new Matrix(m.getColumns() - 1, m.getRows() - 1);    
         double det;
 
         int row;
         int col;
-        for (row = 0; row < getRows(m); row++){
-            for (col = 0; col < getCols(m); col++){
+        for (row = 0; row < m.getRows(); row++){
+            for (col = 0; col < m.getColumns(); col++){
                 if (row != p && col != q){
-                    newMatrix.data[i][j++] = m.data[row][col];
-                    if (j == getCols(m) - 1) {
-                        j = 0;
-                        i++;
+                    newMatrix.data[row][col++] = m.data[row][col];
+                    if (col == m.getColumns() - 1) {
+                        col = 0;
+                        row++;
                     }
                 }
             }
@@ -39,11 +39,11 @@ public class Kofaktor {
         // rumus kofaktor = (-1)^(i+j), 
         // kalau jumlah index baris dan kolom genap, kofaktor positif
         if ((p + q) % 2 == 0) {
-            det = determinanKofaktor(tempMat);
+            det = determinanKofaktor(newMatrix);
         } 
         // kalau jumlah index baris dan kolom ganjil, kofaktor negatif
         else {
-            det = -determinanKofaktor(tempMat);
+            det = -determinanKofaktor(newMatrix);
         }
 
         return det;
@@ -54,23 +54,23 @@ public class Kofaktor {
 
     public static String cramer(Matrix m) {
         String res = new String();
-        Matrix m1 = new Matrix();
-        Matrix m2 = new Matrix();
+        Matrix m1 = new Matrix(m.getRows(),m.getColumns());
+        Matrix m2 = new Matrix(m.getRows(),m.getColumns());
         
-        m.splitMatrix(m1, m2, m.col - 1);
+        m.splitMatrix(m1, m2, m.getColumns() - 1);
         if (m1.isSquare()) {
             if (m1.isSingular()) { //matriks dengan determinan = 0
                 res = "SPL memiliki banyak solusi atau tidak memiliki solusi. Silakan gunakan metode lain.\n";
             } else {
                 double det = determinanKofaktor(m1);
                 double[] valX = new double[m.row];
-                Matrix temp = new Matrix();
-                for (int i = 0; i < m1.col; i++) {
+                Matrix temp = new Matrix(m.getRows(),m.getColumns());
+                for (int i = 0; i < m1.getColumns(); i++) {
                     temp.copyMatrix(m1);
-                    for (int j = 0; j < m1.row; j++) { 
-                        temp.mat[j][i] = m2.mat[j][0];
+                    for (int j = 0; j < m1.getRows(); j++) { 
+                        temp.data[j][i] = m2.data[j][0];
                     }
-                    valX[i] = Determinant.determinanKofaktor(temp) / det; // hitung nilai xi
+                    valX[i] = determinanKofaktor(temp) / det; // hitung nilai xi
                 }
                 for (int i = 0; i < m.row; i++) {
                     double ans = setPrec((0.000000 + valX[i]), 6);

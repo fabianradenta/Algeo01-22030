@@ -26,8 +26,8 @@ public class Interpolasi {
         String res = "f(" + x + ") = ";
 
         int i;
-        for (i = 0; i < m.row; i++) {
-            taksiran += m.data[i][getLastIdxCol()] * Math.pow(x, i);
+        for (i = 0; i < m.getRows(); i++) {
+            taksiran += m.data[i][m.getLastIdxCol()] * Math.pow(x, i);
         }
 
         res += String.format("%.4f", taksiran);
