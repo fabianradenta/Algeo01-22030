@@ -190,7 +190,6 @@ public class Matrix {
     
         return det;
     }    
-    
     public Matrix cofactor() {
         int n = rows;
         if (n != columns) {
@@ -240,29 +239,29 @@ public class Matrix {
         return mHasil;
     }
 
-    public static void main(String[] args) {
-        Matrix m = new Matrix(3, 3);
-        m.readMatrix();
+    // public static void main(String[] args) {
+    //     Matrix m = new Matrix(3, 3);
+    //     m.readMatrix();
 
-        System.out.println();
-        System.out.print("determinan : ");
-        System.out.println(m.determinant());
-        System.out.println();
+    //     System.out.println();
+    //     System.out.print("determinan : ");
+    //     System.out.println(m.determinant());
+    //     System.out.println();
         
         
-        System.out.println();
-        System.out.println("adjoint : ");
-        m.adjoint().displayMatrix();
-        System.out.println();
+    //     System.out.println();
+    //     System.out.println("adjoint : ");
+    //     m.adjoint().displayMatrix();
+    //     System.out.println();
         
-        System.out.println();
-        System.out.println("kofaktor : ");
-        m.cofactor().displayMatrix();
-        System.out.println();
+    //     System.out.println();
+    //     System.out.println("kofaktor : ");
+    //     m.cofactor().displayMatrix();
+    //     System.out.println();
 
-        System.out.println();
-        System.out.println("invers : ");
-        m.inverseWithAdjoint().displayMatrix();
-        System.out.println();
-    }
+    //     System.out.println();
+    //     System.out.println("invers : ");
+    //     m.inverseWithAdjoint().displayMatrix();
+    //     System.out.println();
+    // }
 }
