@@ -239,6 +239,24 @@ public class Matrix {
         return mHasil;
     }
 
+    public Matrix splitMatrixSoal(){
+        Matrix mSoal = new Matrix(getRows(), getColumns());
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getColumns()-1; j++) {
+                mSoal.data[i][j] = this.data[i][j];
+            }
+        }
+        return mSoal;
+    }
+
+    public Matrix splitMatrixHasil(){
+        Matrix mHasil = new Matrix(getRows(), 1);
+        for (int i = 0; i < getRows(); i++) {
+            mHasil.data[i][getRows()] = this.data[i][getRows()];
+        }
+        return mHasil;
+    }
+
     // public static void main(String[] args) {
     //     Matrix m = new Matrix(3, 3);
     //     m.readMatrix();
