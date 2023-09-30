@@ -78,11 +78,11 @@ public class InputOutput{
         switch (resp) {
             case "Y":
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))) {
-                    for (int i = 0; i < getRows(); i++) {
-                        for (int j = 0; j < getColumns(); j++) {
+                    for (int i = 0; i < m.getRows(); i++) {
+                        for (int j = 0; j < m.getColumns(); j++) {
                             String formattedValue = String.format("%.4f", m.data[i][j]);
                             writer.write(formattedValue);
-                            if (j != getColumns() - 1) {
+                            if (j != m.getColumns() - 1) {
                                 writer.write(" ");
                             }
                         }
