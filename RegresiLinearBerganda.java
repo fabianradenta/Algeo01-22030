@@ -15,7 +15,7 @@ public class RegresiLinearBerganda {
         MetodeOBE.readMatrix(sampel);
         MetodeOBE.cetakMatriks(sampel);
         System.out.println("Masukkan nilai yang mau ditaksir :");
-        bacaArray(soal);
+        MetodeOBE.bacaArray(soal);
 
         Matrix smplAugment = new Matrix(jmlSampel, jmlPengubah+2);
         for (int i = 0; i < jmlSampel; i++) {
@@ -25,7 +25,7 @@ public class RegresiLinearBerganda {
             }
         } 
         for (int i = 0; i < regresi.getRows(); i++) {
-            for (int j = 0; j < regresi.getColums(); j++) {
+            for (int j = 0; j < regresi.getColumns(); j++) {
                 regresi.data[i][j] = jumlahHasilKali2Kolom(smplAugment, i, j);
             }
         }

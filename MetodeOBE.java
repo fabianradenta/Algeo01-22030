@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class MetodeOBE {
 
     public static void tukarBaris(Matrix matriks, int baris1, int baris2){
-        for (int i = 0; i < matriks.getColums(); i++) {
+        for (int i = 0; i < matriks.getColumns(); i++) {
             double temp = matriks.data[baris1][i];
             matriks.data[baris1][i] = matriks.data[baris2][i];
             matriks.data[baris2][i] = temp;
@@ -11,13 +11,13 @@ public class MetodeOBE {
     }
 
     public static void kaliKonstan(Matrix matriks, double koef, int baris){
-        for (int i = baris; i < matriks.getColums(); i++) {
+        for (int i = baris; i < matriks.getColumns(); i++) {
             matriks.data[baris][i] = matriks.data[baris][i]/koef;    
         }
     }
 
     public static void operasiBaris(Matrix matriks, double koef, int baris1, int baris2){
-        for (int i = 0; i < matriks.getColums(); i++) {
+        for (int i = 0; i < matriks.getColumns(); i++) {
             matriks.data[baris2][i] = matriks.data[baris2][i]-koef*matriks.data[baris1][i];
         } 
     }
@@ -26,7 +26,7 @@ public class MetodeOBE {
         int idx1UtamaBaris=0;
         // int idx1UtamaKolom=0;
         
-        for (int i = 0; i < matriks.getColums(); i++) {
+        for (int i = 0; i < matriks.getColumns(); i++) {
             
             if (idx1UtamaBaris == matriks.getRows()) {
                 break;
@@ -56,8 +56,8 @@ public class MetodeOBE {
     public static double[] subtitusiMundur(Matrix matriks){
         double[] solusi = new double[matriks.getRows()];
         for (int i = matriks.getRows()-1; i >= 0; i--) {
-            solusi[i] = matriks.data[i][matriks.getColums()-1];
-            for (int j = i+1; j < matriks.getColums()-1; j++) {
+            solusi[i] = matriks.data[i][matriks.getColumns()-1];
+            for (int j = i+1; j < matriks.getColumns()-1; j++) {
                 solusi[i]=solusi[i] - matriks.data[i][j]*solusi[j];
             }
         }
@@ -66,7 +66,7 @@ public class MetodeOBE {
 
     public static void matriksElimGaussJordan(Matrix matriks){
         int idx1UtamaBaris = matriks.getRows() - 1;
-        int idx1UtamaKolom = matriks.getColums() - 1;
+        int idx1UtamaKolom = matriks.getColumns() - 1;
         matriksElimGauss(matriks);
         for (int i = idx1UtamaBaris; i > -1; i--) {
             int j = 0;
@@ -87,7 +87,7 @@ public class MetodeOBE {
     public static double[] solusiGaussJordan(Matrix matriks){
         double[] solusi = new double[matriks.getRows()];
         for (int i = 0; i < matriks.getRows(); i++) {
-            solusi[i] = matriks.data[i][matriks.getColums()-1];
+            solusi[i] = matriks.data[i][matriks.getColumns()-1];
         }
         return solusi;
     }
@@ -97,7 +97,7 @@ public class MetodeOBE {
         int idx1UtamaBaris=0;
         // int idx1UtamaKolom=0;
         
-        for (int i = 0; i < matriks.getColums(); i++) {
+        for (int i = 0; i < matriks.getColumns(); i++) {
             if (idx1UtamaBaris == matriks.getRows()) {
                 break;
             }
@@ -130,13 +130,13 @@ public class MetodeOBE {
     }
 
     public static Matrix balikanOBE(Matrix matriks){
-        Matrix matriksbalikan = new Matrix(matriks.getRows(), 2*matriks.getColums());
+        Matrix matriksbalikan = new Matrix(matriks.getRows(), 2*matriks.getColumns());
         for (int i = 0; i < matriks.getRows(); i++) {
-            for (int j = 0; j < matriks.getColums() ; j++) {
+            for (int j = 0; j < matriks.getColumns() ; j++) {
                 matriksbalikan.data[i][j]=matriks.data[i][j];
             }
-            for (int k = matriks.getColums(); k < 2*matriks.getColums(); k++) {
-                if (i + matriks.getColums() == k){
+            for (int k = matriks.getColumns(); k < 2*matriks.getColumns(); k++) {
+                if (i + matriks.getColumns() == k){
                     matriksbalikan.data[i][k] = 1;
                 } else {
                     matriksbalikan.data[i][k] = 0;
@@ -145,8 +145,8 @@ public class MetodeOBE {
         }
         matriksElimGaussJordan(matriksbalikan);
         for (int i = 0; i < matriks.getRows(); i++) {
-            for (int j = 0; j < matriks.getColums(); j++) {
-                matriks.data[i][j]= matriksbalikan.data[i][j+matriks.getColums()];
+            for (int j = 0; j < matriks.getColumns(); j++) {
+                matriks.data[i][j]= matriksbalikan.data[i][j+matriks.getColumns()];
             }
         }
         return matriks;
@@ -155,14 +155,14 @@ public class MetodeOBE {
     public static void gaussSPL(Matrix matriks){
         double det;
         double[] solusi;
-        Matrix cekmatriks = new Matrix(matriks.getRows(), matriks.getColums()-1);
+        Matrix cekmatriks = new Matrix(matriks.getRows(), matriks.getColumns()-1);
         for (int index = 0; index < matriks.getRows(); index++) {
-            for (int i = 0; i < matriks.getColums()-1; i++) {
+            for (int i = 0; i < matriks.getColumns()-1; i++) {
               cekmatriks.data[index][i] = matriks.data[index][i]; 
             }
         }
         det = determinanOBE(cekmatriks);
-        if (matriks.getRows() == matriks.getColums()-1 && det != 0) {
+        if (matriks.getRows() == matriks.getColumns()-1 && det != 0) {
             matriksElimGauss(matriks);
             solusi = subtitusiMundur(matriks);
             cetakSolusi(solusi);
@@ -172,7 +172,7 @@ public class MetodeOBE {
             matriksElimGaussJordan(matriks);
             int i=matriks.getRows()-1;
             while (i >-1 && !cekAda1Utama(matriks, i) && adaSolusi) {
-                if (matriks.data[i][matriks.getColums()-1] != 0) {
+                if (matriks.data[i][matriks.getColumns()-1] != 0) {
                     adaSolusi = false;
                 } else
 
@@ -190,14 +190,14 @@ public class MetodeOBE {
     public static void gaussJordanSPL(Matrix matriks){
         double det;
         double[] solusi;
-        Matrix cekmatriks = new Matrix(matriks.getRows(), matriks.getColums()-1);
+        Matrix cekmatriks = new Matrix(matriks.getRows(), matriks.getColumns()-1);
         for (int index = 0; index < matriks.getRows(); index++) {
-            for (int i = 0; i < matriks.getColums()-1; i++) {
+            for (int i = 0; i < matriks.getColumns()-1; i++) {
               cekmatriks.data[index][i] = matriks.data[index][i]; 
             }
         }
         det = determinanOBE(cekmatriks);
-        if (matriks.getRows() == matriks.getColums() && det != 0) {
+        if (matriks.getRows() == matriks.getColumns() && det != 0) {
             matriksElimGaussJordan(matriks);
             cetakMatriks(matriks);
             solusi = solusiGaussJordan(matriks);
@@ -208,7 +208,7 @@ public class MetodeOBE {
             matriksElimGaussJordan(matriks);
             int i=matriks.getRows()-1;
             while (i >-1 && !cekAda1Utama(matriks, i) && adaSolusi) {
-                if (matriks.data[i][matriks.getColums()-1] != 0) {
+                if (matriks.data[i][matriks.getColumns()-1] != 0) {
                     adaSolusi = false;
                 } else
 
@@ -238,7 +238,7 @@ public class MetodeOBE {
 
     public static int satupertamakolom(Matrix matriks, int i){
         int j = 0;
-        while (j<matriks.getColums()-1 && matriks.data[i][j]==0 ) {
+        while (j<matriks.getColumns()-1 && matriks.data[i][j]==0 ) {
             j++;
         }
         return j;
@@ -246,10 +246,10 @@ public class MetodeOBE {
 
     public static boolean cekAda1Utama(Matrix matriks, int i){
         int j = 0;
-        while (j<matriks.getColums()-1 && matriks.data[i][j]==0 ) {
+        while (j<matriks.getColumns()-1 && matriks.data[i][j]==0 ) {
             j++;
         }
-        if (j != matriks.getColums()-1) {
+        if (j != matriks.getColumns()-1) {
             return true;
         } else {
             return false;
@@ -257,7 +257,7 @@ public class MetodeOBE {
     }
 
     public static void parametrik(Matrix matriks){
-        double[] idksolusi = new double[matriks.getColums()-1];
+        double[] idksolusi = new double[matriks.getColumns()-1];
         for (int i = 0; i < matriks.getRows(); i++) {
             if (cekAda1Utama(matriks, i)){
                 int j = satupertamakolom(matriks, i);
@@ -272,8 +272,8 @@ public class MetodeOBE {
         }
         for (int i = 0; i < matriks.getRows(); i++) {
             if (cekAda1Utama(matriks, i)){
-            System.out.print("x"+(satupertamakolom(matriks, i) +1)+" = "+ matriks.data[i][matriks.getColums()-1] + " ");
-                for (int j = satupertamakolom(matriks, i); j < matriks.getColums() - 1; j++) {
+            System.out.print("x"+(satupertamakolom(matriks, i) +1)+" = "+ matriks.data[i][matriks.getColumns()-1] + " ");
+                for (int j = satupertamakolom(matriks, i); j < matriks.getColumns() - 1; j++) {
                     //int k = 0;
                     if (idksolusi[j] != 1) {
                         if (matriks.data[i][j] > 0) {
@@ -291,7 +291,7 @@ public class MetodeOBE {
     public static void readMatrix(Matrix matriks){
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < matriks.getRows(); i++) {
-            for (int j = 0; j < matriks.getColums(); j++) {
+            for (int j = 0; j < matriks.getColumns(); j++) {
                 matriks.data[i][j] = scanner.nextDouble();
             }
         }
@@ -299,7 +299,7 @@ public class MetodeOBE {
 
     public static void cetakMatriks(Matrix matriks){
         for (int i = 0; i < matriks.getRows(); i++) {
-            for (int j = 0; j < matriks.getColums(); j++) {
+            for (int j = 0; j < matriks.getColumns(); j++) {
                 System.out.print(matriks.data[i][j]);
                 System.out.print(" ");
             }
