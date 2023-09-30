@@ -1,6 +1,7 @@
-//import java.math.BigDecimal;
-//import java.math.RoundingMode;
-import java.math.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+// kalo ga mau import 1-1 pake yang dibawah
+//import java.math.*; 
 
 public class Kofaktor {
     public static double determinanKofaktor(Matrix m) {
@@ -58,16 +59,17 @@ public class Kofaktor {
 
     public static String cramer(Matrix m) {
         String res = new String();
-        Matrix m1 = new Matrix(m.getRows(),m.getColumns());
-        Matrix m2 = new Matrix(m.getRows(),m.getColumns());
+        Matrix m1 = new Matrix(m.getRows(), m.getColumns());
+        Matrix m2 = new Matrix(m.getRows(), m.getColumns());
         
         m.splitMatrix(m1, m2, m.getColumns() - 1);
+        //m.splitmatrixnya maksudnya gimana?
         if (m1.getRows() == m1.getColumns()) {
             if (m1.determinant() == 0) { //matriks dengan determinan = 0
                 res = "SPL memiliki banyak solusi atau tidak memiliki solusi. Silakan gunakan metode lain.\n";
             } else {
                 double det = determinanKofaktor(m1);
-                double[] valX = new double[m.row];
+                double[] valX = new double[m.getRows()];
                 Matrix temp = new Matrix(m.getRows(),m.getColumns());
                 for (int i = 0; i < m1.getColumns(); i++) {
                     temp.copyMatrix(m1);
