@@ -2,6 +2,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
+// import java.io.BufferedWriter;
+// import java.io.FileWriter;
+import java.util.*;
+
 
 
 public class InputOutput{
@@ -75,6 +79,7 @@ public class InputOutput{
     public static void writeMatrixToFile(Matrix m, String outputPath) {
         System.out.println();
         System.out.print("Apakah Anda ingin menyimpan hasil ke dalam sebuah file (Y/N)? ");
+        // Scanner in = new Scanner(System.in);
         String resp = (in.nextLine()).toUpperCase();
         switch (resp) {
             case "Y":
@@ -103,3 +108,6 @@ public class InputOutput{
         }
     }
 }
+
+
+//hint : saya nambahin dalam bentuk 'komen' apa aja import yang kurang kalo masih bingung
