@@ -82,6 +82,11 @@ public class Kofaktor {
         }
         return res;
     }
-
+    
+    public static double setPrec(double num, int decPlaces) {
+        BigDecimal bd = new BigDecimal(num).setScale(decPlaces, RoundingMode.HALF_UP);
+        double res = bd.doubleValue();
+        return res;
+    }
 }
 
