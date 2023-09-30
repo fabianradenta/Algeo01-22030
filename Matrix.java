@@ -17,15 +17,23 @@ public class Matrix {
     }
 
     public int getLastIdxRow(){
-        return rows-1;
+        return this.rows-1;
+    }
+
+    public int getRows(){
+        return this.rows;
+    }
+
+    public int getColumns(){
+        return this.columns;
     }
 
     public int getLastIdxCol(){
-        return columns-1;
+        return this.columns-1;
     }
 
     public boolean isIdxEff(int i, int j){
-        return (i>=0 && i<=this.getLastIdxRow()) && (j>=0 && j<=this.getLastIdxCol());
+        return (i>=0 && i<=getLastIdxRow()) && (j>=0 && j<=getLastIdxCol());
     }
 
     public double getElmtDiagonal(int i){
@@ -66,12 +74,23 @@ public class Matrix {
         }
     }
 
-    public void multiplyByConstant(double constant){
+    public void pMultiplyByConstant(double constant){
         for (int i=0; i<rows; i++){
             for (int j=0; j<columns; j++){
                 this.data[j][i] *= constant;
             }
         }
+    }
+
+    public Matrix multiplyByConstant(double constant){
+        Matrix mHasil = new Matrix(this.rows, this.columns);
+        this.copyMatrix(mHasil);
+        for (int i=0; i<rows; i++){
+            for (int j=0; j<columns; j++){
+                mHasil.data[j][i] *= constant;
+            }
+        }
+        return mHasil;
     }
 
     public boolean isMatrixSizeEqual(Matrix m2){
@@ -140,5 +159,110 @@ public class Matrix {
         else {
             System.out.println("perkalian tidak bisa dilakukan");
         }
+    }
+
+    public double determinant() {
+        if (rows != columns) {
+            System.out.println("Determinant is only defined for square matrices.");
+            return Double.NaN; // Return Not-a-Number to indicate an error
+        }
+    
+        if (rows == 1) {
+            return data[0][0]; // For a 1x1 matrix, the determinant is the only element
+        }
+    
+        if (rows == 2) {
+            return data[0][0] * data[1][1] - data[0][1] * data[1][0]; // For a 2x2 matrix, use the formula
+        }
+    
+        double det = 0;
+        for (int j = 0; j < columns; j++) {
+            Matrix minorMatrix = new Matrix(rows - 1, columns - 1);
+            for (int i = 1; i < rows; i++) {
+                for (int k = 0, l = 0; k < columns; k++) {
+                    if (k == j) continue;
+                    minorMatrix.data[i - 1][l++] = data[i][k];
+                }
+            }
+            double minorDeterminant = minorMatrix.determinant();
+            det += data[0][j] * Math.pow(-1, j) * minorDeterminant;
+        }
+    
+        return det;
+    }    
+    
+    public Matrix cofactor() {
+        int n = rows;
+        if (n != columns) {
+            System.out.println("Cofactor is only defined for square matrices.");
+            return null; // Return null to indicate an error
+        }
+    
+        Matrix cofactorMatrix = new Matrix(n, n);
+    
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                Matrix minorMatrix = new Matrix(n - 1, n - 1);
+                int minorRow = 0;
+    
+                for (int k = 0; k < n; k++) {
+                    if (k == i) continue;
+                    int minorCol = 0;
+    
+                    for (int l = 0; l < n; l++) {
+                        if (l == j) continue;
+                        minorMatrix.data[minorRow][minorCol] = data[k][l];
+                        minorCol++;
+                    }
+                    minorRow++;
+                }
+    
+                double minorDeterminant = minorMatrix.determinant();
+                cofactorMatrix.data[i][j] = Math.pow(-1, i + j) * minorDeterminant;
+            }
+        }
+    
+        return cofactorMatrix;
+    }
+
+    public Matrix adjoint(){
+        Matrix mHasil = new Matrix(getRows(), getColumns());
+        mHasil = this.cofactor();
+        mHasil.transpose();
+        return mHasil;
+    }
+    
+
+    public Matrix inverseWithAdjoint(){
+        Matrix mHasil = new Matrix(getRows(), getColumns());
+        double constant = (1/this.determinant());
+        mHasil = this.adjoint().multiplyByConstant(constant);
+        return mHasil;
+    }
+
+    public static void main(String[] args) {
+        Matrix m = new Matrix(3, 3);
+        m.readMatrix();
+
+        System.out.println();
+        System.out.print("determinan : ");
+        System.out.println(m.determinant());
+        System.out.println();
+        
+        
+        System.out.println();
+        System.out.println("adjoint : ");
+        m.adjoint().displayMatrix();
+        System.out.println();
+        
+        System.out.println();
+        System.out.println("kofaktor : ");
+        m.cofactor().displayMatrix();
+        System.out.println();
+
+        System.out.println();
+        System.out.println("invers : ");
+        m.inverseWithAdjoint().displayMatrix();
+        System.out.println();
     }
 }
