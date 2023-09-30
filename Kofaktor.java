@@ -1,15 +1,19 @@
+//import java.math.BigDecimal;
+//import java.math.RoundingMode;
+import java.math.*;
+
 public class Kofaktor {
     public static double determinanKofaktor(Matrix m) {
         double det = 0;
 
         // Basis
-        if (m.getRows == 1 && m.getColumns == 1) {
+        if (m.getRows() == 1 && m.getColumns() == 1) {
             det = m.data[0][0];
         }
         // Rekurens
         else {
             int i = 0;
-            for (int j = 0; j < m.getColumns; j++) {
+            for (int j = 0; j < m.getColumns(); j++) {
                 det += (m.data[i][j] * getKofaktor(m, i, j));
 
             }
@@ -58,8 +62,8 @@ public class Kofaktor {
         Matrix m2 = new Matrix(m.getRows(),m.getColumns());
         
         m.splitMatrix(m1, m2, m.getColumns() - 1);
-        if (m1.isSquare()) {
-            if (m1.isSingular()) { //matriks dengan determinan = 0
+        if (m1.getRows() == m1.getColumns()) {
+            if (m1.determinant() == 0) { //matriks dengan determinan = 0
                 res = "SPL memiliki banyak solusi atau tidak memiliki solusi. Silakan gunakan metode lain.\n";
             } else {
                 double det = determinanKofaktor(m1);
@@ -72,7 +76,7 @@ public class Kofaktor {
                     }
                     valX[i] = determinanKofaktor(temp) / det; // hitung nilai xi
                 }
-                for (int i = 0; i < m.row; i++) {
+                for (int i = 0; i < m.getRows(); i++) {
                     double ans = setPrec((0.000000 + valX[i]), 6);
                     res += ("x_" + (i + 1) + " = " + String.format("%.2f", ans) + "\n");
                 }

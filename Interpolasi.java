@@ -1,22 +1,21 @@
 public class Interpolasi {
-    public static double[] Polinom(double[][]matrix){
-
-        int n;
-        n = matrix.length();
-        double[][] newMatrix = double[n][n+1];
+    public static double[] Polinom(Matrix matrix){
+        Matrix newMatrix = new Matrix(matrix.getRows(),matrix.getColumns()+1);
 
         int i, j;
-        for (i = 0; i < n ; i++){
-            for (j = 0; j < n ; j++){
-                if (j==n) {
-                    newMatrix[i][j]=matrix[i][1];
+        for (i = 0; i < matrix.getRows() ; i++){
+            for (j = 0; j < matrix.getColumns() ; j++){
+                if (j==matrix.getColumns()) {
+                    newMatrix.data[i][j]=matrix.data[i][1];
                 } else {
-                    newMatrix[i][j]=Math.pow(matrix[i][0],j);
+                    newMatrix.data[i][j]=Math.pow(matrix.data[i][0],j);
                 }
             }
         }
-
-        // selesaiin pake OBE
+                // selesaiin pake OBE
+        MetodeOBE.matriksElimGaussJordan(newMatrix);
+        double[] solusi = MetodeOBE.solusiGaussJordan(newMatrix);
+        return solusi;
     }
 
 

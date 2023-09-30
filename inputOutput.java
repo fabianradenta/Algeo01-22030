@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.IOException;
 
+
 public class InputOutput{
     public static void main (String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -22,7 +23,7 @@ public class InputOutput{
         }
     }
 
-    public static void outputFromKeyboard(double[][] matrix, int row, int col) {
+    public static void outputFromKeyboard(Matrix matrix, int row, int col) {
         int i;
         int j;
 
