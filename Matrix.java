@@ -136,7 +136,7 @@ public class Matrix {
         }
     }
 
-    public void multiplyMatrix(Matrix m2){
+    public void pMultiplyMatrix(Matrix m2){
         if (this.columns==m2.rows){ //periksa apakah ukuran matrix sama
             Matrix mHasil = new Matrix(this.rows, m2.columns);
             for (int i=0; i<this.rows; i++){
@@ -160,6 +160,26 @@ public class Matrix {
             System.out.println("perkalian tidak bisa dilakukan");
         }
     }
+    
+    public Matrix multiplyMatrix(Matrix m2){
+        if (this.columns==m2.rows){ //periksa apakah ukuran matrix sama
+            Matrix mHasil = new Matrix(this.rows, m2.columns);
+            for (int i=0; i<this.rows; i++){
+                for (int j=0; j<m2.columns; j++){
+                    int hasilJumlah = 0;
+                    for (int k=0; k<this.columns; k++){
+                        hasilJumlah += this.data[i][k]*m2.data[k][j];
+                    }
+                mHasil.data[i][j] = hasilJumlah;
+                }
+            }
+            return mHasil;
+        }
+        else {
+            return null;
+        }
+    }
+
 
     public double determinant() {
         if (rows != columns) {
@@ -233,10 +253,15 @@ public class Matrix {
     
 
     public Matrix inverseWithAdjoint(){
-        Matrix mHasil = new Matrix(getRows(), getColumns());
-        double constant = (1/this.determinant());
-        mHasil = this.adjoint().multiplyByConstant(constant);
-        return mHasil;
+        if (this.determinant()!=0){
+            Matrix mHasil = new Matrix(getRows(), getColumns());
+            double constant = (1/this.determinant());
+            mHasil = this.adjoint().multiplyByConstant(constant);
+            return mHasil;
+        }
+        else {
+            return null;
+        }
     }
 
     public Matrix splitMatrixSoal(){
