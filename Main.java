@@ -48,7 +48,7 @@ public class Main {
                         if (nInverse==mInverse+1){
                             Matrix matr = new Matrix(mInverse, nInverse);
                             Matrix resMatr = new Matrix(mInverse, nInverse);
-                            matr.readMatrix();
+                            matr.readMatrix(scanner);
                             resMatr = SPL.SPLMatrix(matr);
                             if (resMatr==null){
                                 //keluarkan pesan bahwa spl tidak dapat dihandle dengan metode ini
@@ -72,7 +72,7 @@ public class Main {
                         nCramer = scanner.nextInt();
                         if (nCramer==mCramer+1){
                             Matrix matr = new Matrix(mCramer, nCramer);
-                            matr.readMatrix();
+                            matr.readMatrix(scanner);
                             if (Kofaktor.cramer(matr)==null){
                                 //keluarkan pesan bahwa spl tidak dapat dihandle dengan metode ini
                                 System.out.println("Sistem persamaan linear ini tidak dapat diselesaikan dengan metode matriks balikan");
