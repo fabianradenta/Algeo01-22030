@@ -62,8 +62,11 @@ public class Kofaktor {
         Matrix m1 = new Matrix(m.getRows(), m.getColumns());
         Matrix m2 = new Matrix(m.getRows(), m.getColumns());
         
-        m.splitMatrix(m1, m2, m.getColumns() - 1);
+        // m.splitMatrix(m1, m2, m.getColumns() - 1);
+        m1 = m.splitMatrixSoal();
+        m2 = m.splitMatrixHasil();
         //m.splitmatrixnya maksudnya gimana?
+        
         if (m1.getRows() == m1.getColumns()) {
             if (m1.determinant() == 0) { //matriks dengan determinan = 0
                 res = "SPL memiliki banyak solusi atau tidak memiliki solusi. Silakan gunakan metode lain.\n";
@@ -84,7 +87,7 @@ public class Kofaktor {
                 }
             }
         } else {
-            res = "SPL tidak bisa diselesaikan dengan kaidah Cramer. Silakan gunakan metode lain.\n";
+            res = null;
         }
         return res;
     }
