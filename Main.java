@@ -88,6 +88,7 @@ public class Main {
                     }
                 
             }
+            else if (pilihan==2){
         }
     }
 }                     
