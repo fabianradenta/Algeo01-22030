@@ -193,9 +193,4 @@ public class InputOutput{
 
         return fileName;
     }
-
-<<<<<<< Updated upstream:InputOutput.java
-//hint : saya nambahin dalam bentuk 'komen' apa aja import yang kurang kalo masih bingung
-=======
 }
->>>>>>> Stashed changes:inputOutput.java
