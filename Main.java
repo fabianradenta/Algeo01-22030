@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         boolean running = true;
         int pilihan;
-
+        Menu.displayWelcome();
         while (running){
             Menu.displayMainMenu();
             Scanner scanner = new Scanner(System.in);
@@ -20,26 +20,26 @@ public class Main {
             }
             
             if (pilihan==1){
-                String pilihanSubMenu;
+                int pilihanSubMenu;
                 System.out.println();
                 Menu.displayMenuSPL();
                 System.out.println();
                 System.out.print("Masukkan pilihan sub-menu yang ingin dijalankan\t: ");
 
-                pilihanSubMenu = scanner.nextLine();
-                while (pilihanSubMenu!="a" && pilihanSubMenu!="b" && pilihanSubMenu!="c" && pilihanSubMenu!="d"){
+                pilihanSubMenu = scanner.nextInt();
+                while (pilihanSubMenu!=1 && pilihanSubMenu!=2 && pilihanSubMenu!=3 && pilihanSubMenu!=4){
                     System.out.println("Masukan sub-menu tidak valid. Silakan ulangi");
                     System.out.print("Masukkan pilihan sub-menu yang ingin dijalankan\t: ");
-                    pilihanSubMenu = scanner.nextLine();
+                    pilihanSubMenu = scanner.nextInt();
                 }
-                    if (pilihanSubMenu=="a"){ // eliminasi gauss
+                    if (pilihanSubMenu==1){ // eliminasi gauss
                         
                     }
-                    else if (pilihanSubMenu=="b"){  //eliminasi gauss jordan
+                    else if (pilihanSubMenu==2){  //eliminasi gauss jordan
 
                     }
                         
-                    else if (pilihanSubMenu=="c"){   //inverse method
+                    else if (pilihanSubMenu==3){   //inverse method
                         int mInverse,nInverse;
                         System.out.print("Masukkan jumlah baris matriks\t:");
                         mInverse = scanner.nextInt();
@@ -83,7 +83,7 @@ public class Main {
                             }
                         }
                         else {
-                            System.out.println("Matriks dengan ukuran " + mCramer + "x" + nCramer + "tidak dapat dicari solusinya dengan kaidah cramer");
+                            System.out.println("Matriks dengan ukuran " + mCramer + "x" + nCramer + " tidak dapat dicari solusinya dengan kaidah cramer");
                         }
                     }
                 
