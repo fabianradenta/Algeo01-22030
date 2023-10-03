@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class RegresiLinearBerganda {
-    public static void regresiLinearBerganda() {
+    public static String regresiLinearBerganda() {
     // I.S. Sembarang
     // F.S. mencetak hasil regresi linear berganda
         Scanner sc = new Scanner(System.in);
@@ -35,12 +35,40 @@ public class RegresiLinearBerganda {
             }
         }
         MetodeOBE.matriksElimGaussJordan(regresi);
+
+        String fungsi = new String();
         double[] varBebas = MetodeOBE.solusiGaussJordan(regresi);
         double sum = regresi.data[0][regresi.getLastIdxCol()];
+        fungsi = String.format("f(");
+        for (int i = 0; i < soal.length; i++) {
+            fungsi = fungsi + String.format("x%d",(i+1));
+            if (i != soal.length-1) {
+                fungsi = fungsi + String.format(", ");
+            }
+        }
+        fungsi = fungsi + String.format(") = %.05f", sum );
         for (int index = 0; index < varBebas.length-1; index++) {
             sum = sum + soal[index]*varBebas[index+1];
-        }       
-        System.out.println(sum); 
+            if (varBebas[index+1] > 0) {
+                fungsi = fungsi + String.format(" + %.05f*x%d", varBebas[index+1], (index+1));
+            } else if (varBebas[index+1] < 0) {
+                fungsi = fungsi + String.format(" - %.05f*x%d", (-varBebas[index+1]), (index+1));
+            }            
+            
+            System.out.println(varBebas[index+1]);
+        }
+
+        fungsi = fungsi + String.format("\n");
+        fungsi = fungsi + String.format("f(");
+        for (int i = 0; i < soal.length; i++) {
+            fungsi = fungsi + String.format("%.05f", soal[i]);
+            if (i != soal.length-1) {
+                fungsi = fungsi + String.format(", ");
+            }
+        }
+        fungsi = fungsi + String.format(") = %f\n", sum );
+        System.out.print(fungsi);
+        return fungsi;
     }
 
     public static double jumlahHasilKali2Kolom (Matrix matriks, int kolom1, int kolom2){
