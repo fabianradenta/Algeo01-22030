@@ -2,11 +2,6 @@ import java.util.Scanner;
 
 public class BicubicSplineInterpolation {
     public static double matriksBicubicSpline(Matrix mSoal){
-        // int nbaris = 4;
-        // int nkolom = 4;
-        // Matrix mSoal = new Matrix(nbaris, nkolom);
-        // System.out.println();
-        // mSoal.readMatrix();
     // Prekondisi
     // I.S. Matriks mSoal terdefinisi
     // F.S. mengembalikan hasil interpolasi bicubic spline
@@ -14,9 +9,9 @@ public class BicubicSplineInterpolation {
         double xSoal = sc.nextDouble();
         double ySoal = sc.nextDouble();
         Matrix mSoalBicubic = new Matrix(4*mSoal.getRows(), 1);
-        for (int j = 0; j < 4; j++) {
-            for (int i = 0; i < 4; i++) {
-                mSoalBicubic.data[i + j*4][0] = mSoal.data[i][j]; 
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                mSoalBicubic.data[i*4 + j][0] = mSoal.data[i][j]; 
             }
         }
         //MetodeOBE.cetakMatriks(mSoalBicubic);
@@ -113,7 +108,7 @@ public class BicubicSplineInterpolation {
         double sum = 0;
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
-                double koef = matriks.data[0][i+j*4];
+                double koef = matriks.data[i+j*4][0];
                 sum = sum +  koef*Math.pow(x, i)*Math.pow(y,j); 
             }
         }
