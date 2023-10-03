@@ -40,8 +40,7 @@ public class Matrix {
         return this.data[i][i];
     }
 
-    public void readMatrix(){
-        Scanner scanner = new Scanner(System.in);
+    public void readMatrix(Scanner scanner){
         for (int i=0; i<this.rows; i++){
             for (int j=0; j<this.columns; j++){
                 this.data[i][j] = scanner.nextDouble();

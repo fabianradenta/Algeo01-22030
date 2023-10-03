@@ -1,14 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.io.IOException;
-// import java.io.BufferedWriter;
-// import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.*;
 
 
-
 public class InputOutput{
+    private static Scanner in = new Scanner(System.in);
     public static void main (String[] args) {
         Scanner scan = new Scanner(System.in);
         int m = 3;
@@ -79,7 +78,7 @@ public class InputOutput{
     public static void writeMatrixToFile(Matrix m, String outputPath) {
         System.out.println();
         System.out.print("Apakah Anda ingin menyimpan hasil ke dalam sebuah file (Y/N)? ");
-        // Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         String resp = (in.nextLine()).toUpperCase();
         switch (resp) {
             case "Y":
@@ -107,7 +106,91 @@ public class InputOutput{
                 break;
         }
     }
+
+    public static Matrix createMatrix(boolean mustSquare) {
+        Menu.displayMenuInput();
+        int choice = -1;
+        switch (choice){
+            case 1:
+                return inputMatrixKeyboard(mustSquare);
+            case 2:
+                return inputMatrixFile(mustSquare);
+            default:
+                System.out.println("Input tidak dikenali.");
+                break;
+        }
+    }
+
+    // Bikin matrix dr keyboard
+    public static Matrix inputMatrixKeyboard(boolean mustSquare) {
+        int rows, cols;
+
+        while (true) {
+        if (mustSquare) {
+            System.out.println("Masukkan ukuran matriks");
+            System.out.print("> ");
+            rows = in.nextInt();
+            cols = rows;
+        } else {
+            System.out.println("Masukkan jumlah baris dan kolom matriks");
+            System.out.println("(Pisahkan dengan spasi)");
+            System.out.print("> ");
+            rows = in.nextInt();
+            cols = in.nextInt();
+        }
+        if (rows > 0 && cols > 0) {
+            break;
+        } else {
+            System.out.println("Masukan invalid. Jumlah baris dan kolom harus > 0");
+        }
+
+        Matrix matriks = new Matrix(rows, cols);
+        
+
+        System.out.println("Masukkan elemen matriks");
+        for (int i = 0; i < matriks.getRows(); i++) {
+            for (int j = 0; j < matriks.getColumns(); j++) {
+                System.out.print("Elemen baris ke-" + (i + 1) + " kolom ke-" + (j + 1) + ": ");
+                matriks.data[i][j] = in.nextDouble();
+            }
+        }
+
+        return matriks;
+    }
+
+    // Bikin matrix dr File
+    public static Matrix inputMatrixFile(boolean mustSquare) {
+        String fileName;
+        int[] rowsCols;
+
+        while (true) {
+        fileName = "../test/" + inputFileName();
+        rowsCols = FileReadWrite.calcRowsCols(fileName);
+        if (mustSquare && (rowsCols[0] != rowsCols[1])) {
+            System.out.println("Matriks dalam file tidak berbentuk persegi");
+        } else {
+            break;
+        }
+        }
+        matriks = FileReadWrite.readFile(fileName, rowsCols[0], rowsCols[1]);
+
+        return matriks;
+    }
+
+    public static String inputFileName() {
+        String fileName;
+        FileReader fr = null;
+
+        System.out.println("Masukkan nama file");
+        System.out.print("> ");
+        fileName = in.next();
+        try {
+            fr = new FileReader("../test/" + fileName);
+        } catch (FileNotFoundException fe) {
+            System.out.println("File tidak ditemukan.");
+            fileName = inputFileName();
+        }
+
+        return fileName;
+    }
 }
-
-
-//hint : saya nambahin dalam bentuk 'komen' apa aja import yang kurang kalo masih bingung

@@ -37,10 +37,10 @@ public class Menu {
         System.out.println("=========================================================================");
         System.out.println("                     MENU SISTEM PERSAMAAN LINIER");
         System.out.println("=========================================================================");
-        System.out.println("a. Metode Eliminasi Gauss");
-        System.out.println("b. Metode Eliminasi Gauss-Jordan");
-        System.out.println("c. Metode Matriks Balikan");
-        System.out.println("d. Kaidah Cramer");
+        System.out.println("1. Metode Eliminasi Gauss");
+        System.out.println("2. Metode Eliminasi Gauss-Jordan");
+        System.out.println("3. Metode Matriks Balikan");
+        System.out.println("4. Kaidah Cramer");
     }
 
     // Daftar Menu Utama -> Determinan
@@ -48,8 +48,8 @@ public class Menu {
         System.out.println("=========================================================================");
         System.out.println("                             MENU DETERMINAN");
         System.out.println("=========================================================================");
-        System.out.println("a. Metode Eliminasi Gauss");
-        System.out.println("b. Metode Ekspansi Kofaktor");
+        System.out.println("1. Metode Eliminasi Gauss");
+        System.out.println("2. Metode Ekspansi Kofaktor");
     }
 
     // Daftar Menu Utama -> Inverse
@@ -57,8 +57,8 @@ public class Menu {
         System.out.println("=========================================================================");
         System.out.println("                              MENU INVERSE");
         System.out.println("=========================================================================");
-        System.out.println("a. Metode Eliminasi Gauss-Jordan");
-        System.out.println("b. Metode Matriks Kofaktor");
+        System.out.println("1. Metode Eliminasi Gauss-Jordan");
+        System.out.println("2. Metode Matriks Kofaktor");
     }
 
     // Daftar Menu Input Data

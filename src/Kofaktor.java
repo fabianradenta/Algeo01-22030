@@ -1,7 +1,5 @@
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-// kalo ga mau import 1-1 pake yang dibawah
-//import java.math.*; 
+import java.math.*; 
+// Big Decimal, RoundingMode
 
 public class Kofaktor {
     public static double determinanKofaktor(Matrix m) {
@@ -16,23 +14,21 @@ public class Kofaktor {
             int i = 0;
             for (int j = 0; j < m.getColumns(); j++) {
                 det += (m.data[i][j] * getKofaktor(m, i, j));
-
             }
         }
         return det;
     }
 
-
     public static double getKofaktor(Matrix m, int p, int q) {
         Matrix newMatrix = new Matrix(m.getColumns() - 1, m.getRows() - 1);    
         double det;
 
-        int row;
-        int col;
-        for (row = 0; row < m.getRows(); row++){
-            for (col = 0; col < m.getColumns(); col++){
-                if (row != p && col != q){
-                    newMatrix.data[row][col++] = m.data[row][col];
+        int row=0;
+        int col=0;
+        for (int i = 0; i < m.getRows(); i++){
+            for (int j = 0; j < m.getColumns(); j++){
+                if (i != p && j != q){
+                    newMatrix.data[row][col++] = m.data[i][j];
                     if (col == m.getColumns() - 1) {
                         col = 0;
                         row++;
@@ -60,10 +56,11 @@ public class Kofaktor {
     public static String cramer(Matrix m) {
         String res = new String();
         Matrix m1 = new Matrix(m.getRows(), m.getColumns());
-        Matrix m2 = new Matrix(m.getRows(), m.getColumns());
+        Matrix m2 = new Matrix(m.getRows(), 1);
         
-        m.splitMatrix(m1, m2, m.getColumns() - 1);
-        //m.splitmatrixnya maksudnya gimana?
+        m1 = m.splitMatrixSoal();
+        m2 = m.splitMatrixHasil();
+        
         if (m1.getRows() == m1.getColumns()) {
             if (m1.determinant() == 0) { //matriks dengan determinan = 0
                 res = "SPL memiliki banyak solusi atau tidak memiliki solusi. Silakan gunakan metode lain.\n";
@@ -84,7 +81,7 @@ public class Kofaktor {
                 }
             }
         } else {
-            res = "SPL tidak bisa diselesaikan dengan kaidah Cramer. Silakan gunakan metode lain.\n";
+            res = "Bukan matrix persegi, sehingga tidak bisa diselesaikan dengan kaidah Cramer. Silakan gunakan metode lain.\n";
         }
         return res;
     }
@@ -95,4 +92,3 @@ public class Kofaktor {
         return res;
     }
 }
-

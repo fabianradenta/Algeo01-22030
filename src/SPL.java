@@ -1,4 +1,13 @@
 public class SPL{
+    public static String displayInverse(Matrix x){
+        String res = new String();
+        for (int i = 0; i < x.getRows(); i++) {
+            double ans = Kofaktor.setPrec((0.000000 + x.data[i][0]), 6);
+            res += ("x_" + (i + 1) + " = " + String.format("%.2f", ans) + "\n");
+        }
+        return res;
+    }
+
     public static Matrix SPLMatrix(Matrix m){
         Matrix A = new Matrix(m.getRows(), m.getColumns()-1);
         Matrix b = new Matrix(m.getRows(),1);
@@ -27,14 +36,4 @@ public class SPL{
             return null;
         }
     }
-
-    public static void main(String[] args) {
-        
-        Matrix matr = new Matrix(4, 5);
-        matr.readMatrix();
-        System.out.println();
-        SPLMatrix(matr).displayMatrix();
-        // System.out.println(SPLMatrix(matr));
-    }
 }
-
