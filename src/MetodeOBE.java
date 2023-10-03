@@ -247,7 +247,7 @@ public class MetodeOBE {
             if (adaSolusi) {
                 parametrik(matriks);
             } else {
-                System.out.println("Tidak Memiliki Solusi");
+                System.out.println("Matriks ini Tidak Memiliki Solusi");
             }
         }
 
