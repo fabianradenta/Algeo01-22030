@@ -232,7 +232,7 @@ public class MetodeOBE {
             solusi = solusiGaussJordan(matriks);
             cetakSolusi(solusi);
         } else {
-            System.out.println("TIDAK KONSISTEN");
+            //System.out.println("TIDAK KONSISTEN");
             boolean adaSolusi = true;
             matriksElimGaussJordan(matriks);
             int i=matriks.getRows()-1;
@@ -243,7 +243,7 @@ public class MetodeOBE {
 
                 i--;
             }
-            System.out.println(i);
+            
             if (adaSolusi) {
                 parametrik(matriks);
             } else {
