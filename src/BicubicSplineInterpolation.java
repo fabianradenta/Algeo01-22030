@@ -1,11 +1,15 @@
 import java.util.Scanner;
 
 public class BicubicSplineInterpolation {
-    public static double matriksBicubicSpline(Matrix mSoal){
-    // Prekondisi
-    // I.S. Matriks mSoal terdefinisi
-    // F.S. mengembalikan hasil interpolasi bicubic spline
+    public static void main(String[] args) {
+        // ini masih input-an keyboard, untuk yang file belum
         Scanner sc = new Scanner(System.in);
+        Matrix mSoal = new Matrix(4,4);
+        System.out.println();
+        System.out.println("Masukkan konfigurasi nilai fungsi dan turunan berarah disekitarnya");
+        mSoal.readMatrix(sc);
+        //matriksBicubicSpline(mSoal);
+        System.out.println("Masukkan nilai f(x,y) yang mau ditaksir :");
         double xSoal = sc.nextDouble();
         double ySoal = sc.nextDouble();
         Matrix mSoalBicubic = new Matrix(4*mSoal.getRows(), 1);
@@ -14,8 +18,21 @@ public class BicubicSplineInterpolation {
                 mSoalBicubic.data[i*4 + j][0] = mSoal.data[i][j]; 
             }
         }
-        //MetodeOBE.cetakMatriks(mSoalBicubic);
-        Matrix mBicubic = new Matrix(4*mSoal.getRows(),4*mSoal.getColumns());
+        Matrix mBicubic = matrixBicubicSplineInterpolation();
+        //System.out.println("hasil akhir");
+        Matrix inversBicubic = MetodeOBE.balikanOBE(mBicubic);
+        inversBicubic.pMultiplyMatrix(mSoalBicubic);
+        //inversBicubic.displayMatrix();
+        //MetodeOBE.cetakMatriks(invers);
+        double hasil = solusiBicubic(inversBicubic, xSoal, ySoal);
+        //System.out.println("hahahaha");
+        System.out.println(hasil);
+
+    }
+
+
+    public static Matrix matrixBicubicSplineInterpolation(){
+        Matrix mBicubic = new Matrix(16,16);
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 2; x++) {
@@ -40,15 +57,58 @@ public class BicubicSplineInterpolation {
                 barisBicubicTurunanXY(mBicubic, x, y);
             }
         }
-        //System.out.println("hasil akhir");
-        Matrix invers = MetodeOBE.balikanOBE(mBicubic);
-        invers.multiplyMatrix(mSoalBicubic);
-        //MetodeOBE.cetakMatriks(invers);
-        double hasil = solusiBicubic(invers, xSoal, ySoal);
-        //System.out.println("hahahaha");
-        System.out.println(hasil);
-        return hasil;
+        return mBicubic;
     }
+    
+    // public static double matriksBicubicSpline(Matrix mSoal){
+    // // Prekondisi
+    // // I.S. Matriks mSoal terdefinisi
+    // // F.S. mengembalikan hasil interpolasi bicubic spline
+    //     Scanner sc = new Scanner(System.in);
+    //     double xSoal = sc.nextDouble();
+    //     double ySoal = sc.nextDouble();
+    //     Matrix mSoalBicubic = new Matrix(4*mSoal.getRows(), 1);
+    //     for (int i = 0; i < 4; i++) {
+    //         for (int j = 0; j < 4; j++) {
+    //             mSoalBicubic.data[i*4 + j][0] = mSoal.data[i][j]; 
+    //         }
+    //     }
+    //     //MetodeOBE.cetakMatriks(mSoalBicubic);
+    //     Matrix mBicubic = new Matrix(4*mSoal.getRows(),4*mSoal.getColumns());
+
+    //     for (int y = 0; y < 2; y++) {
+    //         for (int x = 0; x < 2; x++) {
+    //             barisBicubic(mBicubic, x, y);
+    //         }
+    //     }
+
+    //     for (int y = 0; y < 2; y++) {
+    //         for (int x = 0; x < 2; x++) {
+    //             barisBicubicTurunanX(mBicubic, x, y);
+    //         }
+    //     }
+
+    //     for (int y = 0; y < 2; y++) {
+    //         for (int x = 0; x < 2; x++) {
+    //             barisBicubicTurunanY(mBicubic, x, y);
+    //         }
+    //     }
+
+    //     for (int y = 0; y < 2; y++) {
+    //         for (int x = 0; x < 2; x++) {
+    //             barisBicubicTurunanXY(mBicubic, x, y);
+    //         }
+    //     }
+    //     //System.out.println("hasil akhir");
+    //     Matrix invers = MetodeOBE.balikanOBE(mBicubic);
+    //     invers.pMultiplyMatrix(mSoalBicubic);
+    //     //MetodeOBE.cetakMatriks(invers);
+    //     invers.displayMatrix();
+    //     double hasil = solusiBicubic(invers, xSoal, ySoal);
+    //     //System.out.println("hahahaha");
+    //     System.out.println(hasil);
+    //     return hasil;
+    // }
 
     public static void barisBicubic(Matrix matriks, int x, int y){
     // I.S. Matriks, nilai x, nilai y terdefinisi
