@@ -44,7 +44,7 @@ Program ini dikembangkan untuk memenuhi Tugas Besar Pertama mata kuliah Aljabar 
 2. Buka terminal 
 3. Jalankan Main.class dengan mengetik `java Main`
 
-File .txt yang ingin dimasukkan dapat ditaruh di foldet `./test`
+File .txt yang ingin dimasukkan dapat ditaruh di folder `./test`
 
 ### Menggunakan .jar
 
