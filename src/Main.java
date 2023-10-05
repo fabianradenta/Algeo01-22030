@@ -364,14 +364,16 @@ public class Main {
                         int nTitik = scanner.nextInt();
                         Matrix matr = new Matrix(nTitik, 2);
                         matr.readMatrix();
-                        String str = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
-                        System.out.println(str);
+                        Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
+                        String strRes = Double.toString(res);
+                        System.out.println(strRes);
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
                         IO.pReadMatrix(matr);
-                        String str = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
-                        System.out.println(str);
+                        Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
+                        String strRes = Double.toString(res);
+                        System.out.println(strRes);
                     }
                 }
                 else if (pilihan==5){   // interpolasi bicubic spline
