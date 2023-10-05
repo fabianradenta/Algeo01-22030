@@ -11,8 +11,6 @@ public class RegresiLinearBerganda {
         } else { // masukkan dari file
             Matrix tempsampel = new Matrix(0, 0);
             IO.pReadMatrix(tempsampel);
-            System.out.println("Masukkan nilai yang mau ditaksir :");
-            MetodeOBE.bacaArray(soal);
             sampel = tempsampel;
         }
         double[] soal = new double[sampel.getColumns()-1];
