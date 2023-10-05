@@ -252,8 +252,8 @@ public class Matrix {
     
 
     public Matrix inverseWithAdjoint(){
-        if (this.rows==this.columns-1){
-            if (this.determinant()!=0 || this.determinant()==(Double) null){
+        if (this.rows==this.columns){
+            if (this.determinant()!=0){
                 Matrix mHasil = new Matrix(getRows(), getColumns());
                 double constant = (1/this.determinant());
                 mHasil = this.adjoint().multiplyByConstant(constant);
@@ -269,9 +269,9 @@ public class Matrix {
     }
 
     public Matrix splitMatrixSoal(){
-        Matrix mSoal = new Matrix(getRows(), getColumns());
-        for (int i = 0; i < getRows(); i++) {
-            for (int j = 0; j < getColumns()-1; j++) {
+        Matrix mSoal = new Matrix(getRows(), getColumns()-1);
+        for (int i = 0; i < mSoal.rows; i++) {
+            for (int j = 0; j < mSoal.columns; j++) {
                 mSoal.data[i][j] = this.data[i][j];
             }
         }
@@ -286,29 +286,29 @@ public class Matrix {
         return mHasil;
     }
 
-    // public static void main(String[] args) {
-    //     Matrix m = new Matrix(3, 3);
-    //     m.readMatrix();
+    public static void main(String[] args) {
+        Matrix m = new Matrix(3, 3);
+        m.readMatrix();
 
-    //     System.out.println();
-    //     System.out.print("determinan : ");
-    //     System.out.println(m.determinant());
-    //     System.out.println();
+        System.out.println();
+        System.out.print("determinan : ");
+        System.out.println(m.determinant());
+        System.out.println();
         
         
-    //     System.out.println();
-    //     System.out.println("adjoint : ");
-    //     m.adjoint().displayMatrix();
-    //     System.out.println();
+        System.out.println();
+        System.out.println("adjoint : ");
+        m.adjoint().displayMatrix();
+        System.out.println();
         
-    //     System.out.println();
-    //     System.out.println("kofaktor : ");
-    //     m.cofactor().displayMatrix();
-    //     System.out.println();
+        System.out.println();
+        System.out.println("kofaktor : ");
+        m.cofactor().displayMatrix();
+        System.out.println();
 
-    //     System.out.println();
-    //     System.out.println("invers : ");
-    //     m.inverseWithAdjoint().displayMatrix();
-    //     System.out.println();
-    // }
+        System.out.println();
+        System.out.println("invers : ");
+        m.inverseWithAdjoint().displayMatrix();
+        System.out.println();
+    }
 }

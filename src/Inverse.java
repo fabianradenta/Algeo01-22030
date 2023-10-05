@@ -36,4 +36,9 @@ public class Inverse{
             return null;
         }
     }
+    public static void main(String[] args) {
+        Matrix m = new Matrix(3, 4);
+        m.readMatrix();
+        SPLMatrix(m).displayMatrix();
+    }
 }
