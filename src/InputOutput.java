@@ -1,9 +1,10 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+// import java.io.File;
+// import java.io.FileNotFoundException;
+// import java.io.IOException;
+// import java.io.BufferedWriter;
+// import java.io.FileWriter;
 import java.util.*;
+import java.io.*;
 
 
 public class InputOutput{
@@ -17,6 +18,8 @@ public class InputOutput{
 
         readMatrixFromFile();
     }
+
+
 
     public static void inputFromKeyboard(Scanner scan, Matrix matrix, int row, int col) {
         for (int i = 0; i < row; i++) {
@@ -110,17 +113,42 @@ public class InputOutput{
 
         while (true) {
         fileName = "../test/" + inputFileName();
-        rowsCols = FileReadWrite.calcRowsCols(fileName);
+        rowsCols = calcRowsCols(fileName);
         if (mustSquare && (rowsCols[0] != rowsCols[1])) {
             System.out.println("Matriks dalam file tidak berbentuk persegi");
         } else {
             break;
         }
         }
-        matriks = FileReadWrite.readFile(fileName, rowsCols[0], rowsCols[1]);
+        Matrix  matriks = new Matrix(0, 0);
+        matriks = readFile(fileName, rowsCols[0], rowsCols[1]);
 
         return matriks;
     }
+
+    public static Matrix readFile(String fileName, int rows, int cols) {
+        // Membaca file input dan mengembalikan matriks bacaan
+        Matrix mat = new Matrix(rows, cols);
+    
+        System.out.println("Mencoba membaca file: " + fileName);
+    
+        FileReader fr = null;
+        try {
+          fr = new FileReader(fileName);
+        } catch (FileNotFoundException fe) {
+          System.out.println("File tidak ditemukan");
+        }
+        Scanner rowScanner2 = new Scanner(fr);
+    
+        for (int i = 0; i < rows; i++) {
+          for (int j = 0; j < cols; j++) {
+            double input = rowScanner2.nextDouble();
+            mat.data[i][j] = input;
+          }
+        }
+        rowScanner2.close();
+        return mat;
+      }
 
     public static String inputFileName() {
         String fileName;
@@ -137,5 +165,48 @@ public class InputOutput{
         }
 
         return fileName;
+    }
+
+    public static int[] calcRowsCols(String fileName) {
+        // Menghitung jumlah baris dan kolom dari matriks input file
+        FileReader fr = null;
+        try {
+          fr = new FileReader(fileName);
+        } catch (FileNotFoundException fe) {
+          System.out.println("File tidak ditemukan");
+        }
+    
+        int rows = 0, cols = 0;
+        String row = "";
+        Scanner rowScanner = new Scanner(fr);
+        while (rowScanner.hasNextLine()) {
+          rows++;
+          row = rowScanner.nextLine();
+        }
+        Scanner colScanner = new Scanner(row);
+        while (colScanner.hasNextDouble()) {
+          cols++;
+          colScanner.nextDouble();
+        }
+        rowScanner.close();
+        colScanner.close();
+    
+        int[] rowsCols = new int[2];
+        rowsCols[0] = rows;
+        rowsCols[1] = cols;
+    
+        return rowsCols;
+      }    
+
+    public static void writeStringToFile(String msg, String filePath){
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            writer.write(msg);
+            // Close the FileWriter to ensure that the data is flushed and the file is saved
+            writer.close();
+            System.out.println("String berhasil ditulis ke file.");
+        } catch (IOException e) {
+            System.err.println("An error occurred while writing to the file: " + e.getMessage());
+        }
     }
 }
