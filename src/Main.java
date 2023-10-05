@@ -367,15 +367,21 @@ public class Main {
 
                     if (pilihanInput==1){
                         System.out.print("Masukkan banyak titik\t: ");
-                        scanner.nextInt();
-                        //belum dilanjutin
-                        //gatau cara make fungsinya :)
+                        int nTitik = scanner.nextInt();
+                        Matrix matr = new Matrix(nTitik, 2);
+                        matr.readMatrix();
+                        Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
+                        String resStr = Double.toString(res);
+                        System.out.print("Taksiran nilai f(x) pada titik tersebut adalah ");
+                        System.out.println(resStr);
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
                         matr = InputOutput.readMatrixFromFile();
-                        //belum dilanjutin
-                        //gatau cara make fungsinya :)
+                        Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
+                        String resStr = Double.toString(res);
+                        System.out.print("Taksiran nilai f(x) pada titik tersebut adalah ");
+                        System.out.println(resStr);
                     }
                 }
                 else if (pilihan==5){   // interpolasi bicubic spline
