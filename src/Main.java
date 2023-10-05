@@ -61,7 +61,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            IO.pReadMatrixFromFile(matr);
+                            IO.pReadMatrix(matr);
                             System.out.println();
                             System.out.println(MetodeOBE.gaussSPL(matr));
                         }
@@ -93,7 +93,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            IO.pReadMatrixFromFile(matr);
+                            IO.pReadMatrix(matr);
                             System.out.println();
                             System.out.println(MetodeOBE.gaussJordanSPL(matr));
                         }
@@ -137,7 +137,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            IO.pReadMatrixFromFile(matr);
+                            IO.pReadMatrix(matr);
                             if (matr.getRows()!=matr.getColumns()-1){
                                 System.out.println("Matriks dengan ukuran " + matr.getRows() + "x" + matr.getRows() + "tidak dapat dicari solusinya dengan metode matriks balikan");
                                 System.out.println();
@@ -183,7 +183,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            IO.pReadMatrixFromFile(matr);
+                            IO.pReadMatrix(matr);
                             if (matr.getRows()!=matr.getColumns()-1){
                                 System.out.println("Matriks dengan ukuran " + matr.getRows() + "x" + matr.getRows() + "tidak dapat dicari solusinya dengan metode matriks balikan");
                                 System.out.println();
@@ -245,7 +245,7 @@ public class Main {
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        IO.pReadMatrixFromFile(matr);
+                        IO.pReadMatrix(matr);
                         if (matr.rows!=matr.columns){
                             System.out.println("Matriks dengan ukuran " + matr.rows + "x" + matr.columns + " tidak memiliki determinan");
                             System.out.println();
@@ -323,7 +323,7 @@ public class Main {
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        IO.pReadMatrixFromFile(matr);
+                        IO.pReadMatrix(matr);
                         if (matr.rows!=matr.columns){
                             System.out.println("Matriks dengan ukuran " + matr.rows + "x" + matr.columns + " tidak memiliki matriks balikan");
                             System.out.println();
@@ -364,18 +364,14 @@ public class Main {
                         int nTitik = scanner.nextInt();
                         Matrix matr = new Matrix(nTitik, 2);
                         matr.readMatrix();
-                        Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
-                        String resStr = Double.toString(res);
-                        System.out.print("Taksiran nilai f(x) pada titik tersebut adalah ");
-                        System.out.println(resStr);
+                        String str = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
+                        System.out.println(str);
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        IO.pReadMatrixFromFile(matr);
-                        Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
-                        String resStr = Double.toString(res);
-                        System.out.print("Taksiran nilai f(x) pada titik tersebut adalah ");
-                        System.out.println(resStr);
+                        IO.pReadMatrix(matr);
+                        String str = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
+                        System.out.println(str);
                     }
                 }
                 else if (pilihan==5){   // interpolasi bicubic spline
