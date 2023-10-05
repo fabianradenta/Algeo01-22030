@@ -8,16 +8,16 @@ import java.io.*;
 
 
 public class InputOutput{
-    private static Scanner in = new Scanner(System.in);
-    public static void main (String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int m = 3;
-        int n = 3;
-        Matrix matrix = new Matrix(m, n);
-        inputFromKeyboard(scan, matrix, m, n);
+//     private static Scanner in = new Scanner(System.in);
+//     public static void main (String[] args) {
+//         Scanner scan = new Scanner(System.in);
+//         int m = 3;
+//         int n = 3;
+//         Matrix matrix = new Matrix(m, n);
+//         inputFromKeyboard(scan, matrix, m, n);
 
-        readMatrixFromFile();
-    }
+//         readMatrixFromFile();
+//     }
 
 
 
@@ -41,42 +41,67 @@ public class InputOutput{
         }
     }
 
-    public static Matrix readMatrixFromFile() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Masukkan nama file: ");
-        String fileName = scanner.nextLine();
+    // public static Matrix readMatrixFromFile() {
+    //     Scanner scanner = new Scanner(System.in);
+    //     System.out.print("Masukkan nama file: ");
+    //     String fileName = scanner.nextLine();
 
-        try (Scanner fileScanner = new Scanner(new File("../test/input/" + fileName))) {
-            int rowcnt = 0;
-            int colcnt = 0;
+    //     try (Scanner fileScanner = new Scanner(new File("../test/input/" + fileName))) {
+    //         int rowcnt = 0;
+    //         int colcnt = 0;
 
-            while (fileScanner.hasNextLine()) {
-                String[] temp = fileScanner.nextLine().split(" ");
-                rowcnt++;
-                colcnt = Math.max(colcnt, temp.length);
-            }
+    //         while (fileScanner.hasNextLine()) {
+    //             String[] temp = fileScanner.nextLine().split(" ");
+    //             rowcnt++;
+    //             colcnt = Math.max(colcnt, temp.length);
+    //         }
 
-            Matrix ret = new Matrix(rowcnt, colcnt);
+    //         Matrix ret = new Matrix(rowcnt, colcnt);
 
-            fileScanner.close();
+    //         fileScanner.close();
 
-            try (Scanner matrixScanner = new Scanner(new File("../test/input/" + fileName))) {
-                int i = 0;
-                while (matrixScanner.hasNextLine()) {
-                    String[] temp = matrixScanner.nextLine().split(" ");
-                    for (int j = 0; j < temp.length; j++) {
-                        ret.data[i][j] = Double.parseDouble(temp[j]);
-                    }
-                    i++;
-                }
-            }
+    //         try (Scanner matrixScanner = new Scanner(new File("../test/input/" + fileName))) {
+    //             int i = 0;
+    //             while (matrixScanner.hasNextLine()) {
+    //                 String[] temp = matrixScanner.nextLine().split(" ");
+    //                 for (int j = 0; j < temp.length; j++) {
+    //                     ret.data[i][j] = Double.parseDouble(temp[j]);
+    //                 }
+    //                 i++;
+    //             }
+    //         }
 
-            return ret;
-        } catch (FileNotFoundException e) {
-            System.out.println("File tidak ditemukan.");
-            return null;
+    //         return ret;
+    //     } catch (FileNotFoundException e) {
+    //         System.out.println("File tidak ditemukan.");
+    //         return null;
+    //     }
+    // }
+
+    public static Matrix readFile(String fileName, int rows, int cols) {
+        // Membaca file input dan mengembalikan matriks bacaan
+        Matrix mat = new Matrix(rows,cols);
+    
+        System.out.println("Mencoba membaca file: " + fileName);
+    
+        FileReader fr = null;
+        try {
+          fr = new FileReader(fileName);
+        } catch (FileNotFoundException fe) {
+        System.out.println("File tidak ditemukan");
         }
-    }
+        Scanner rowScanner2 = new Scanner(fr);
+    
+        for (int i = 0; i < rows; i++) {
+          for (int j = 0; j < cols; j++) {
+            double input = rowScanner2.nextDouble();
+            mat.data[i][j] = input;
+          }
+        }
+        rowScanner2.close();
+        return mat;
+      }
+    
 
     public static void writeMatrixToFile(Matrix m, String outputPath,int resp) {
         switch (resp) {
@@ -126,29 +151,38 @@ public class InputOutput{
         return matriks;
     }
 
-    public static Matrix readFile(String fileName, int rows, int cols) {
-        // Membaca file input dan mengembalikan matriks bacaan
-        Matrix mat = new Matrix(rows, cols);
-    
-        System.out.println("Mencoba membaca file: " + fileName);
-    
-        FileReader fr = null;
-        try {
-          fr = new FileReader(fileName);
-        } catch (FileNotFoundException fe) {
-          System.out.println("File tidak ditemukan");
+    public static Matrix readMatrixFromFile(String fileName) {
+        try (Scanner fileScanner = new Scanner(new File(fileName))) {
+            int rowcnt = 0;
+            int colcnt = 0;
+
+            while (fileScanner.hasNextLine()) {
+                String[] temp = fileScanner.nextLine().split(" ");
+                rowcnt++;
+                colcnt = Math.max(colcnt, temp.length);
+            }
+
+            Matrix ret = new Matrix(rowcnt, colcnt);
+
+            fileScanner.close();
+
+            try (Scanner matrixScanner = new Scanner(new File(fileName))) {
+                int i = 0;
+                while (matrixScanner.hasNextLine()) {
+                    String[] temp = matrixScanner.nextLine().split(" ");
+                    for (int j = 0; j < temp.length; j++) {
+                        ret.data[i][j] = Double.parseDouble(temp[j]);
+                    }
+                    i++;
+                }
+            }
+
+            return ret;
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + fileName);
+            return null;
         }
-        Scanner rowScanner2 = new Scanner(fr);
-    
-        for (int i = 0; i < rows; i++) {
-          for (int j = 0; j < cols; j++) {
-            double input = rowScanner2.nextDouble();
-            mat.data[i][j] = input;
-          }
-        }
-        rowScanner2.close();
-        return mat;
-      }
+    }
 
     public static String inputFileName() {
         String fileName;
@@ -156,7 +190,7 @@ public class InputOutput{
 
         System.out.println("Masukkan nama file");
         System.out.print("> ");
-        fileName = in.next();
+        fileName =in.next();
         try {
             fr = new FileReader("../test/" + fileName);
         } catch (FileNotFoundException fe) {

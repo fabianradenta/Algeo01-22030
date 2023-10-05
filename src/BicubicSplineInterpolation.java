@@ -35,7 +35,6 @@ public class BicubicSplineInterpolation {
         fungsi = String.format("f(%f,%f) = %f", xSoal,ySoal,hasil );
         
         //System.out.println("hahahaha");
-        System.out.println(fungsi);
         return fungsi;
 
     }

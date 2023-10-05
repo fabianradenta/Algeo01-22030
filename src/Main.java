@@ -1,30 +1,24 @@
 import java.util.*;
 
-import javax.lang.model.util.ElementScanner14;
-import javax.security.auth.Subject;
-import javax.xml.catalog.Catalog;
-
-// import com.apple.laf.AquaImageFactory.NineSliceMetrics;
-
 public class Main {
     public static void main(String[] args) {
         boolean running = true;
         int pilihan;
         Menu.displayWelcome();
         Scanner scanner = new Scanner(System.in);
-        try {
-            while (running){
+        while (running){
+            try {
                 System.out.println();
                 Menu.displayMainMenu();
                 System.out.println();
                 System.out.print("Masukkan pilihan menu yang ingin dijalankan\t: ");
                 pilihan = scanner.nextInt();
-                while (pilihan<1 || pilihan>7){
+                while (pilihan<1 || pilihan>8){
                     System.out.println("Masukan tidak valid. Silakan ulangi");
                     System.out.print("Masukkan pilihan menu yang ingin dijalankan\t: ");
                     pilihan = scanner.nextInt();
                 }
-                
+            
                 if (pilihan==1){    // spl
                     int pilihanSubMenu;
                     System.out.println();
@@ -63,13 +57,13 @@ public class Main {
                             Matrix matr = new Matrix(mGauss, nGauss);
                             matr.readMatrix();
                             System.out.println();
-                            MetodeOBE.gaussSPL(matr);   //mau diganti dari void jadi String supaya bisa di write ke file
+                            System.out.println(MetodeOBE.gaussSPL(matr));   //mau diganti dari void jadi String supaya bisa di write ke file
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            matr = InputOutput.readMatrixFromFile();
+                            IO.pReadMatrix(matr);
                             System.out.println();
-                            MetodeOBE.gaussSPL(matr);
+                            System.out.println(MetodeOBE.gaussSPL(matr));
                         }
 
                     }
@@ -95,13 +89,13 @@ public class Main {
                             Matrix matr = new Matrix(mGaussJordan, nGaussJordan);
                             matr.readMatrix();
                             System.out.println();
-                            MetodeOBE.gaussJordanSPL(matr);
+                            System.out.println(MetodeOBE.gaussJordanSPL(matr));
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            matr = InputOutput.readMatrixFromFile();
+                            IO.pReadMatrix(matr);
                             System.out.println();
-                            MetodeOBE.gaussJordanSPL(matr);
+                            System.out.println(MetodeOBE.gaussJordanSPL(matr));
                         }
                     }
                         
@@ -143,7 +137,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            matr = InputOutput.readMatrixFromFile();
+                            IO.pReadMatrix(matr);
                             if (matr.getRows()!=matr.getColumns()-1){
                                 System.out.println("Matriks dengan ukuran " + matr.getRows() + "x" + matr.getRows() + "tidak dapat dicari solusinya dengan metode matriks balikan");
                                 System.out.println();
@@ -155,7 +149,7 @@ public class Main {
                             }
                         }
                     } 
-                    else {
+                    else {      // cramer
                         int pilihanInput;
                         Menu.displayMenuInput();
                         System.out.print("Masukkan pilihan input\t: ");
@@ -176,7 +170,7 @@ public class Main {
                                 matr.readMatrix();
                                 if (Kofaktor.cramer(matr)==null){
                                     //keluarkan pesan bahwa spl tidak dapat dihandle dengan metode ini
-                                    System.out.println("Sistem persamaan linear ini tidak dapat diselesaikan dengan metode matriks balikan");
+                                    System.out.println("Sistem persamaan linear ini tidak dapat diselesaikan dengan kaidah cramer");
                                 }
                                 else {
                                     // cetak solusi ke terminal
@@ -189,7 +183,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            matr = InputOutput.readMatrixFromFile();
+                            IO.pReadMatrix(matr);
                             if (matr.getRows()!=matr.getColumns()-1){
                                 System.out.println("Matriks dengan ukuran " + matr.getRows() + "x" + matr.getRows() + "tidak dapat dicari solusinya dengan metode matriks balikan");
                                 System.out.println();
@@ -251,7 +245,7 @@ public class Main {
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        matr = InputOutput.readMatrixFromFile();
+                        IO.pReadMatrix(matr);
                         if (matr.rows!=matr.columns){
                             System.out.println("Matriks dengan ukuran " + matr.rows + "x" + matr.columns + " tidak memiliki determinan");
                             System.out.println();
@@ -329,7 +323,7 @@ public class Main {
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        matr = InputOutput.readMatrixFromFile();
+                        IO.pReadMatrix(matr);
                         if (matr.rows!=matr.columns){
                             System.out.println("Matriks dengan ukuran " + matr.rows + "x" + matr.columns + " tidak memiliki matriks balikan");
                             System.out.println();
@@ -367,15 +361,19 @@ public class Main {
 
                     if (pilihanInput==1){
                         System.out.print("Masukkan banyak titik\t: ");
-                        scanner.nextInt();
-                        //belum dilanjutin
-                        //gatau cara make fungsinya :)
+                        int nTitik = scanner.nextInt();
+                        Matrix matr = new Matrix(nTitik, 2);
+                        matr.readMatrix();
+                        Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
+                        String strRes = Double.toString(res);
+                        System.out.println(strRes);
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        matr = InputOutput.readMatrixFromFile();
-                        //belum dilanjutin
-                        //gatau cara make fungsinya :)
+                        IO.pReadMatrix(matr);
+                        Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
+                        String strRes = Double.toString(res);
+                        System.out.println(strRes);
                     }
                 }
                 else if (pilihan==5){   // interpolasi bicubic spline
@@ -395,7 +393,8 @@ public class Main {
                     else {
                         parameterInput = false;
                     }
-                    BicubicSplineInterpolation.driverBicubic(parameterInput);
+                    String strResult =BicubicSplineInterpolation.driverBicubic(parameterInput);
+                    System.out.println(strResult);
                 }
                 else if (pilihan==6){   //regresi linear berganda
                     int pilihanInput;
@@ -415,6 +414,10 @@ public class Main {
                         parameterInput = false;
                     }
                     String strResult = RegresiLinearBerganda.driverRegresi(parameterInput);
+                    System.out.println(strResult);
+                }
+                else if (pilihan==7){
+                    System.out.println("Upgrade ke versi premium untuk menggunakan pilihan ini ˶ᵔ ᵕ ᵔ˶");
                 }
                 else {
                     System.out.println();
@@ -422,11 +425,11 @@ public class Main {
                     running = false;
                     scanner.close();
                 }
+            } catch (InputMismatchException e){
+                System.out.println();
+                System.out.println("Masukan tidak valid. Silakan ulangi.");
+                scanner.nextLine();
             }
-        } catch (Exception e){
-            System.out.println("Something went wrong.");
-        } finally {
-            System.out.println("end of program ");
         }
     }
 }
