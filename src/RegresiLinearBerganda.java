@@ -1,18 +1,22 @@
 import java.util.Scanner;
 
 public class RegresiLinearBerganda {
-    public static void main(String[] args) {
+    public static String driverRegresi(boolean inputKeyboard) {
         // saya udah bikin garis besarnya, cuman belum lengkap
-        //if (true) { //masukan dari keyboard
-            Matrix sampel = inputRegresiKeyboard();
-            double[] soal = new double[sampel.getColumns()-1];
+        Matrix sampel = new Matrix(0, 0);
+        double[] soal = new double[sampel.getColumns()-1];
+        if (inputKeyboard) { //masukan dari keyboard
+            sampel = inputRegresiKeyboard();
             System.out.println("Masukkan nilai yang mau ditaksir :");
             MetodeOBE.bacaArray(soal);
-        //} else { // masukkan dari file
-            
-        //}
+        } else { // masukkan dari file
+            sampel = InputOutput.readMatrixFromFile();
+            System.out.println("Masukkan nilai yang mau ditaksir :");
+            MetodeOBE.bacaArray(soal);
+        }
         
-        String p = prosesRegresi(sampel, soal);
+        String fungsi = prosesRegresi(sampel, soal);
+        return fungsi;
         // lanjutannya string p mau disimpan di file atau tidak
     }
 
@@ -58,7 +62,7 @@ public class RegresiLinearBerganda {
             }
         }
         MetodeOBE.matriksElimGaussJordan(regresi);
-
+        regresi.displayMatrix();
         String fungsi = new String();
         double[] varBebas = MetodeOBE.solusiGaussJordan(regresi);
         double sum = regresi.data[0][regresi.getLastIdxCol()];
