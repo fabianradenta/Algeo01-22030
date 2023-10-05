@@ -178,11 +178,60 @@ public class MetodeOBE {
         return matriks;
     }
     
-    public static void gaussSPL(Matrix matriks){
+    public static String gaussSPL(Matrix matriks){
     // I.S. Matriks augmented terdefinisi
     // F.S. Mencetak solusi matriks augmented ke layar
         double det;
         double[] solusi;
+        String fungsi = new String();
+        Matrix cekmatriks = new Matrix(matriks.getRows(), matriks.getColumns()-1);
+        for (int index = 0; index < matriks.getRows(); index++) {
+            for (int i = 0; i < matriks.getColumns()-1; i++) {
+              cekmatriks.data[index][i] = matriks.data[index][i]; 
+            }
+        }
+        det = determinanOBE(cekmatriks);
+        if (matriks.getRows() == (matriks.getColumns()-1) && det != 0) {
+        // Matriks augmented memiliki solusi unik
+            matriksElimGauss(matriks);
+            solusi = subtitusiMundur(matriks);
+            // cetakSolusi(solusi);
+            for (int i = 0; i < solusi.length; i++) {
+                fungsi = fungsi + String.format("x%d = %f\n", (i+1), solusi [i]);
+                // System.out.print(solusi[i]);
+                // if (i != solusi.length-1) {
+                //     fungsi = fungsi + String.format(", ");
+                // } else {
+                //     fungsi = fungsi + String.format("\n");
+                // }
+            }
+            
+        } else {
+        // Matriks singular
+            boolean adaSolusi = true;
+            matriksElimGaussJordan(matriks);
+            matriks.displayMatrix();
+            int i=matriks.getRows()-1;
+            while (i >-1 && !cekAda1Utama(matriks, i) && adaSolusi) {
+                if (matriks.data[i][matriks.getColumns()-1] != 0) {
+                    adaSolusi = false;
+                } else
+                i--;
+            }
+            if (adaSolusi) {
+                fungsi = parametrik(matriks);
+            } else {
+                fungsi = ("Sistem Persamaan Linear Ini Tidak Memiliki Solusi");
+            }
+        }
+        System.out.println(fungsi);
+        return fungsi;
+    }
+
+    public static String gaussJordanSPL(Matrix matriks){
+        double det;
+        double[] solusi;
+        String fungsi = new String();
         Matrix cekmatriks = new Matrix(matriks.getRows(), matriks.getColumns()-1);
         for (int index = 0; index < matriks.getRows(); index++) {
             for (int i = 0; i < matriks.getColumns()-1; i++) {
@@ -191,46 +240,13 @@ public class MetodeOBE {
         }
         det = determinanOBE(cekmatriks);
         if (matriks.getRows() == matriks.getColumns()-1 && det != 0) {
-        // Matriks augmented memiliki solusi unik
-            matriksElimGauss(matriks);
-            solusi = subtitusiMundur(matriks);
-            cetakSolusi(solusi);
-        } else {
-        // Matriks singular
-            boolean adaSolusi = true;
-            matriksElimGaussJordan(matriks);
-            int i=matriks.getRows()-1;
-            while (i >-1 && !cekAda1Utama(matriks, i) && adaSolusi) {
-                if (matriks.data[i][matriks.getColumns()-1] != 0) {
-                    adaSolusi = false;
-                } else
-
-                i--;
-            }
-            System.out.println(i);
-            if (adaSolusi) {
-                parametrik(matriks);
-            } else {
-                System.out.println("Tidak Memiliki Solusi");
-            }
-        }
-    }
-
-    public static void gaussJordanSPL(Matrix matriks){
-        double det;
-        double[] solusi;
-        Matrix cekmatriks = new Matrix(matriks.getRows(), matriks.getColumns()-1);
-        for (int index = 0; index < matriks.getRows(); index++) {
-            for (int i = 0; i < matriks.getColumns()-1; i++) {
-              cekmatriks.data[index][i] = matriks.data[index][i]; 
-            }
-        }
-        det = determinanOBE(cekmatriks);
-        if (matriks.getRows() == matriks.getColumns() && det != 0) {
             matriksElimGaussJordan(matriks);
             //matriks.displayMatrix();
             solusi = solusiGaussJordan(matriks);
-            cetakSolusi(solusi);
+            //cetakSolusi(solusi);
+            for (int i = 0; i < solusi.length; i++) {
+                fungsi = fungsi + String.format("x%d = %f\n", (i+1), solusi [i]);
+            }
         } else {
             //System.out.println("TIDAK KONSISTEN");
             boolean adaSolusi = true;
@@ -240,17 +256,17 @@ public class MetodeOBE {
                 if (matriks.data[i][matriks.getColumns()-1] != 0) {
                     adaSolusi = false;
                 } else
-
                 i--;
             }
             
             if (adaSolusi) {
-                parametrik(matriks);
+                fungsi = parametrik(matriks);
             } else {
-                System.out.println("Matriks ini Tidak Memiliki Solusi");
+                fungsi = ("Sistem Persamaan Linear ini Tidak Memiliki Solusi");
             }
         }
-
+        System.out.println(fungsi);
+        return fungsi;
     }
 
     public static void cetakSolusi(double[] solusi){
@@ -291,38 +307,55 @@ public class MetodeOBE {
     }
 
 
-    public static void parametrik(Matrix matriks){
+    public static String parametrik(Matrix matriks){
     // I.S. Matriks singular terdefinisi
     // F.S. Mencetak persamaan parametrik ke layar
         double[] idksolusi = new double[matriks.getColumns()-1];
+        String[] fungsi = new String[matriks.getColumns()-1];
         for (int i = 0; i < matriks.getRows(); i++) {
             if (cekAda1Utama(matriks, i)){
                 int j = satupertamakolom(matriks, i);
                 idksolusi[j] = 1;
             }
         }
-
+        cetakSolusi(idksolusi);
         for (int i = 0; i < idksolusi.length; i++) {
             if (idksolusi[i] == 0) {
-                System.out.println("x"+(i +1)+" = t"+ (i+1));
+                fungsi[i] = String.format("x%d = x%d",(i+1), (i+1));
+
             }
         }
         for (int i = 0; i < matriks.getRows(); i++) {
             if (cekAda1Utama(matriks, i)){
-            System.out.print("x"+(satupertamakolom(matriks, i) +1)+" = "+ matriks.data[i][matriks.getColumns()-1] + " ");
+                fungsi[(satupertamakolom(matriks, i))] =String.format("x%d = %f " ,(satupertamakolom(matriks, i) +1), (matriks.data[i][matriks.getColumns()-1]));
+                //System.out.print("x"+(satupertamakolom(matriks, i) +1)+" = "+ matriks.data[i][matriks.getColumns()-1] + " ");
                 for (int j = satupertamakolom(matriks, i); j < matriks.getColumns() - 1; j++) {
                     //int k = 0;
                     if (idksolusi[j] != 1) {
                         if (matriks.data[i][j] > 0) {
-                            System.out.print("- " +matriks.data[i][j]+"*t" + (j+1) +" ");
+                            fungsi[(satupertamakolom(matriks, i))] = fungsi[(satupertamakolom(matriks, i))] + String.format("- %f*x%d " , (matriks.data[i][j]) ,  (j+1));
+                            //System.out.print("- " +matriks.data[i][j]+"*x" + (j+1) +" ");
                         } else if (matriks.data[i][j] < 0){
-                            System.out.print("+ " +(-matriks.data[i][j])+"*t" + (j+1) +" ");
+                            fungsi[(satupertamakolom(matriks, i))] = fungsi[(satupertamakolom(matriks, i))] + String.format("+ %f*x%d " , (matriks.data[i][j]) ,  (j+1));
+                            //System.out.print("+ " +(-matriks.data[i][j])+"*x" + (j+1) +" ");
                         }                        
                     }
                 }
-                System.out.println();
+                // System.out.println();
             }
         }
+        String hasilparametrik = new String();
+        for (int i = 0; i < fungsi.length; i++) {
+            // System.out.print("x" + (i + 1) + " = ");
+            // System.out.print(fungsi[i]);
+            hasilparametrik = hasilparametrik + fungsi[i] + ("\n");
+            // if (i != fungsi.length-1) {
+            //     System.out.print("\n");
+            // } else {
+            //     System.out.println();
+            // }
+        }
+        return hasilparametrik;
     }
 
     public static void bacaArray(double[] soal){
