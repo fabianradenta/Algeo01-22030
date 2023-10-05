@@ -127,13 +127,13 @@ public class Main {
                                 Matrix resMatr = new Matrix(mInverse, nInverse);
                                 matr.readMatrix();
                                 System.out.println();
-                                resMatr = SPL.SPLMatrix(matr);
+                                resMatr = Inverse.SPLMatrix(matr);
                                 if (resMatr==null){
                                     //keluarkan pesan bahwa spl tidak dapat dihandle dengan metode ini
                                     System.out.println("Sistem persamaan linear ini tidak dapat diselesaikan dengan metode matriks balikan");
                                 }
                                 else {
-                                    System.out.println(SPL.displayInverse(resMatr));
+                                    System.out.println(Inverse.displayInverse(resMatr));
                                 }
                             }
                             else {
@@ -150,8 +150,8 @@ public class Main {
                             }
                             else {
                                 Matrix resMatr = new Matrix(matr.getColumns(),matr.getColumns());
-                                resMatr = SPL.SPLMatrix(matr);
-                                System.out.println(SPL.displayInverse(resMatr));
+                                resMatr = Inverse.SPLMatrix(matr);
+                                System.out.println(Inverse.displayInverse(resMatr));
                             }
                         }
                     } 
@@ -421,6 +421,7 @@ public class Main {
                     System.out.println();
                     Menu.displayThanks();
                     running = false;
+                    scanner.close();
                 }
             }
         } catch (Exception e){

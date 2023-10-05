@@ -1,4 +1,4 @@
-public class SPL{
+public class Inverse{
     public static String displayInverse(Matrix x){
         String res = new String();
         for (int i = 0; i < x.getRows(); i++) {
