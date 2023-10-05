@@ -63,11 +63,11 @@ public class Kofaktor {
         
         if (m1.getRows() == m1.getColumns()) {
             if (m1.determinant() == 0) { //matriks dengan determinan = 0
-                res = "SPL memiliki banyak solusi atau tidak memiliki solusi. Silakan gunakan metode lain.\n";
+                res = null;
             } else {
                 double det = determinanKofaktor(m1);
                 double[] valX = new double[m.getRows()];
-                Matrix temp = new Matrix(m.getRows(),m.getColumns());
+                Matrix temp = new Matrix(m1.getRows(),m1.getColumns());
                 for (int i = 0; i < m1.getColumns(); i++) {
                     temp.copyMatrix(m1);
                     for (int j = 0; j < m1.getRows(); j++) { 
@@ -81,7 +81,7 @@ public class Kofaktor {
                 }
             }
         } else {
-            res = "Bukan matrix persegi, sehingga tidak bisa diselesaikan dengan kaidah Cramer. Silakan gunakan metode lain.\n";
+            res = null;
         }
         return res;
     }
@@ -90,5 +90,11 @@ public class Kofaktor {
         BigDecimal bd = new BigDecimal(num).setScale(decPlaces, RoundingMode.HALF_UP);
         double res = bd.doubleValue();
         return res;
+    }
+
+    public static void main(String[] args) {
+        Matrix m = new Matrix(3,4);
+        m.readMatrix();
+        System.out.println(cramer(m));
     }
 }

@@ -15,7 +15,7 @@ public class Inverse{
 
 
         for (int i=0; i<A.getRows(); i++){
-            for (int j=0; j<A.getColumns()-1; j++){
+            for (int j=0; j<A.getColumns(); j++){
                 A.data[i][j] = m.data[i][j];
             }
         }
@@ -35,5 +35,10 @@ public class Inverse{
             // ini belum tau algoritmanya gimana
             return null;
         }
+    }
+    public static void main(String[] args) {
+        Matrix m = new Matrix(3, 4);
+        m.readMatrix();
+        SPLMatrix(m).displayMatrix();
     }
 }
