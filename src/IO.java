@@ -78,26 +78,23 @@ public class IO{
 
     public static void pWriteMatrix(Matrix m){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Masukkan path file yang dituju\t: ");
+        System.out.print("Masukkan path file yang dituju\t: ");
         String fileName = scanner.nextLine();
         writeMatrixToFile(m, fileName);
-        scanner.close();
     }
     
     public static void pWriteString(String msg){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Masukkan path file yang dituju\t: ");
+        System.out.print("Masukkan path file yang dituju\t: ");
         String fileName = scanner.nextLine();
         writeStringToFile(msg, fileName);
-        scanner.close();
     }
 
     public static void pReadMatrix(Matrix m){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Masukkan path file yang berisi matriks\t: ");
+        System.out.print("Masukkan path file yang berisi matriks\t: ");
         String fileName = scanner.nextLine();
         m = readMatrixFromFile(fileName);
-        scanner.close();
     }
 
     

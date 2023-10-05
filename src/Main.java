@@ -57,15 +57,42 @@ public class Main {
                             Matrix matr = new Matrix(mGauss, nGauss);
                             matr.readMatrix();
                             System.out.println();
-                            System.out.println(MetodeOBE.gaussSPL(matr));   //mau diganti dari void jadi String supaya bisa di write ke file
+                            System.out.println(MetodeOBE.gaussSPL(matr));
+
+                            Menu.displayMenuOutput();
+                            System.out.println();
+                            System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                            int pilihanOutput;
+                            pilihanOutput = scanner.nextInt();
+                            while (pilihanOutput!=1 && pilihanOutput!=2){
+                                System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                pilihanOutput = scanner.nextInt();
+                            }
+                            if (pilihanOutput==1){
+                                IO.pWriteString(MetodeOBE.gaussSPL(matr));
+                            }
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
                             IO.pReadMatrix(matr);
                             System.out.println();
                             System.out.println(MetodeOBE.gaussSPL(matr));
-                        }
 
+                            Menu.displayMenuOutput();
+                            System.out.println();
+                            System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                            int pilihanOutput;
+                            pilihanOutput = scanner.nextInt();
+                            while (pilihanOutput!=1 && pilihanOutput!=2){
+                                System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                pilihanOutput = scanner.nextInt();
+                            }
+                            if (pilihanOutput==1){
+                                IO.pWriteString(MetodeOBE.gaussSPL(matr));
+                            }
+                        }
                     }
                     else if (pilihanSubMenu==2){  //eliminasi gauss jordan
                         int pilihanInput;
@@ -90,12 +117,40 @@ public class Main {
                             matr.readMatrix();
                             System.out.println();
                             System.out.println(MetodeOBE.gaussJordanSPL(matr));
+
+                            Menu.displayMenuOutput();
+                            System.out.println();
+                            System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                            int pilihanOutput;
+                            pilihanOutput = scanner.nextInt();
+                            while (pilihanOutput!=1 && pilihanOutput!=2){
+                                System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                pilihanOutput = scanner.nextInt();
+                            }
+                            if (pilihanOutput==1){
+                                IO.pWriteString(MetodeOBE.gaussJordanSPL(matr));
+                            }
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
                             IO.pReadMatrix(matr);
                             System.out.println();
                             System.out.println(MetodeOBE.gaussJordanSPL(matr));
+   
+                            Menu.displayMenuOutput();
+                            System.out.println();
+                            System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                            int pilihanOutput;
+                            pilihanOutput = scanner.nextInt();
+                            while (pilihanOutput!=1 && pilihanOutput!=2){
+                                System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                pilihanOutput = scanner.nextInt();
+                            }
+                            if (pilihanOutput==1){
+                                IO.pWriteString(MetodeOBE.gaussJordanSPL(matr));
+                            }
                         }
                     }
                         
@@ -128,6 +183,19 @@ public class Main {
                                 }
                                 else {
                                     System.out.println(Inverse.displayInverse(resMatr));
+                                    Menu.displayMenuOutput();
+                                    System.out.println();
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    int pilihanOutput;
+                                    pilihanOutput = scanner.nextInt();
+                                    while (pilihanOutput!=1 && pilihanOutput!=2){
+                                        System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                        System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                        pilihanOutput = scanner.nextInt();
+                                    }
+                                    if (pilihanOutput==1){
+                                        IO.pWriteString(Inverse.displayInverse(resMatr));
+                                    }
                                 }
                             }
                             else {
@@ -146,6 +214,19 @@ public class Main {
                                 Matrix resMatr = new Matrix(matr.getColumns(),matr.getColumns());
                                 resMatr = Inverse.SPLMatrix(matr);
                                 System.out.println(Inverse.displayInverse(resMatr));
+                                Menu.displayMenuOutput();
+                                System.out.println();
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                int pilihanOutput;
+                                pilihanOutput = scanner.nextInt();
+                                while (pilihanOutput!=1 && pilihanOutput!=2){
+                                    System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    pilihanOutput = scanner.nextInt();
+                                }
+                                if (pilihanOutput==1){
+                                    IO.pWriteString(Inverse.displayInverse(resMatr));
+                                }
                             }
                         }
                     } 
@@ -175,6 +256,19 @@ public class Main {
                                 else {
                                     // cetak solusi ke terminal
                                     System.out.print(Kofaktor.cramer(matr));
+                                    Menu.displayMenuOutput();
+                                    System.out.println();
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    int pilihanOutput;
+                                    pilihanOutput = scanner.nextInt();
+                                    while (pilihanOutput!=1 && pilihanOutput!=2){
+                                        System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                        System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                        pilihanOutput = scanner.nextInt();
+                                    }
+                                    if (pilihanOutput==1){
+                                        IO.pWriteString(Kofaktor.cramer(matr));
+                                    }
                                 }
                             }
                             else {
@@ -190,6 +284,19 @@ public class Main {
                             }
                             else {
                                 System.out.print(Kofaktor.cramer(matr));
+                                Menu.displayMenuOutput();
+                                System.out.println();
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                int pilihanOutput;
+                                pilihanOutput = scanner.nextInt();
+                                while (pilihanOutput!=1 && pilihanOutput!=2){
+                                    System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    pilihanOutput = scanner.nextInt();
+                                }
+                                if (pilihanOutput==1){
+                                    IO.pWriteString(Kofaktor.cramer(matr));
+                                }
                             }
                         }
                     }
@@ -234,12 +341,38 @@ public class Main {
                             matr.readMatrix();
                             System.out.println();
                             if (pilihanSubMenu==1){
-                                System.out.print("Determinan dari matriks tersebut adalah " + MetodeOBE.determinanOBE(matr));
+                                System.out.println("Determinan dari matriks tersebut adalah " + MetodeOBE.determinanOBE(matr));
+                                Menu.displayMenuOutput();
                                 System.out.println();
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                int pilihanOutput;
+                                pilihanOutput = scanner.nextInt();
+                                while (pilihanOutput!=1 && pilihanOutput!=2){
+                                    System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    pilihanOutput = scanner.nextInt();
+                                }
+                                if (pilihanOutput==1){
+                                    IO.pWriteString(Kofaktor.cramer(matr));
+                                }
                             }
                             else {
-                                System.out.print("Determinan dari matriks tersebut adalah " + Kofaktor.determinanKofaktor(matr));
+                                System.out.println("Determinan dari matriks tersebut adalah " + Kofaktor.determinanKofaktor(matr));
+                                System.out.print(Kofaktor.cramer(matr));
+                                Menu.displayMenuOutput();
                                 System.out.println();
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                int pilihanOutput;
+                                pilihanOutput = scanner.nextInt();
+                                while (pilihanOutput!=1 && pilihanOutput!=2){
+                                    System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    pilihanOutput = scanner.nextInt();
+                                }
+                                if (pilihanOutput==1){
+                                    IO.pWriteString(Double.toString(Kofaktor.determinanKofaktor(matr)));
+                                }
+
                             }
                         }            
                     }
@@ -252,12 +385,36 @@ public class Main {
                         }
                         else {
                             if (pilihanSubMenu==1){
-                                System.out.print("Determinan dari matriks tersebut adalah " + MetodeOBE.determinanOBE(matr));
+                                System.out.println("Determinan dari matriks tersebut adalah " + MetodeOBE.determinanOBE(matr));
+                                Menu.displayMenuOutput();
                                 System.out.println();
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                int pilihanOutput;
+                                pilihanOutput = scanner.nextInt();
+                                while (pilihanOutput!=1 && pilihanOutput!=2){
+                                    System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    pilihanOutput = scanner.nextInt();
+                                }
+                                if (pilihanOutput==1){
+                                    IO.pWriteString(Double.toString(MetodeOBE.determinanOBE(matr)));
+                                }
                             }
                             else {
-                                System.out.print("Determinan dari matriks tersebut adalah " + Kofaktor.determinanKofaktor(matr));
+                                System.out.println("Determinan dari matriks tersebut adalah " + Kofaktor.determinanKofaktor(matr));
+                                Menu.displayMenuOutput();
                                 System.out.println();
+                                System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                int pilihanOutput;
+                                pilihanOutput = scanner.nextInt();
+                                while (pilihanOutput!=1 && pilihanOutput!=2){
+                                    System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    pilihanOutput = scanner.nextInt();
+                                }
+                                if (pilihanOutput==1){
+                                    IO.pWriteString(Double.toString(MetodeOBE.determinanOBE(matr)));
+                                }
                             }
                         }
                     }
@@ -336,10 +493,36 @@ public class Main {
                                 if (pilihanSubMenu==1){
                                     MetodeOBE.balikanOBE(matr).displayMatrix();
                                     System.out.println();
+                                    Menu.displayMenuOutput();
+                                    System.out.println();
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    int pilihanOutput;
+                                    pilihanOutput = scanner.nextInt();
+                                    while (pilihanOutput!=1 && pilihanOutput!=2){
+                                        System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                        System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                        pilihanOutput = scanner.nextInt();
+                                    }
+                                    if (pilihanOutput==1){
+                                        IO.pWriteMatrix(MetodeOBE.balikanOBE(matr));
+                                    }
                                 }
                                 else {
                                     matr.inverseWithAdjoint().displayMatrix();
                                     System.out.println();
+                                    Menu.displayMenuOutput();
+                                    System.out.println();
+                                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                    int pilihanOutput;
+                                    pilihanOutput = scanner.nextInt();
+                                    while (pilihanOutput!=1 && pilihanOutput!=2){
+                                        System.out.println("Masukan output tidak valid. Silakan ulangi");
+                                        System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                                        pilihanOutput = scanner.nextInt();
+                                    }
+                                    if (pilihanOutput==1){
+                                        IO.pWriteMatrix(matr.inverseWithAdjoint());
+                                    }
                                 }
                             }
                             else {
@@ -367,6 +550,19 @@ public class Main {
                         Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
                         String strRes = Double.toString(res);
                         System.out.println(strRes);
+                        Menu.displayMenuOutput();
+                        System.out.println();
+                        System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                        int pilihanOutput;
+                        pilihanOutput = scanner.nextInt();
+                        while (pilihanOutput!=1 && pilihanOutput!=2){
+                            System.out.println("Masukan output tidak valid. Silakan ulangi");
+                            System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                            pilihanOutput = scanner.nextInt();
+                        }
+                        if (pilihanOutput==1){
+                            IO.pWriteString(strRes);
+                        }
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
@@ -374,6 +570,19 @@ public class Main {
                         Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
                         String strRes = Double.toString(res);
                         System.out.println(strRes);
+                        Menu.displayMenuOutput();
+                        System.out.println();
+                        System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                        int pilihanOutput;
+                        pilihanOutput = scanner.nextInt();
+                        while (pilihanOutput!=1 && pilihanOutput!=2){
+                            System.out.println("Masukan output tidak valid. Silakan ulangi");
+                            System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                            pilihanOutput = scanner.nextInt();
+                        }
+                        if (pilihanOutput==1){
+                            IO.pWriteString(strRes);
+                        }
                     }
                 }
                 else if (pilihan==5){   // interpolasi bicubic spline
@@ -395,6 +604,19 @@ public class Main {
                     }
                     String strResult =BicubicSplineInterpolation.driverBicubic(parameterInput);
                     System.out.println(strResult);
+                    Menu.displayMenuOutput();
+                    System.out.println();
+                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                    int pilihanOutput;
+                    pilihanOutput = scanner.nextInt();
+                    while (pilihanOutput!=1 && pilihanOutput!=2){
+                        System.out.println("Masukan output tidak valid. Silakan ulangi");
+                        System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                        pilihanOutput = scanner.nextInt();
+                    }
+                    if (pilihanOutput==1){
+                        IO.pWriteString(strResult);
+                    }
                 }
                 else if (pilihan==6){   //regresi linear berganda
                     int pilihanInput;
@@ -415,6 +637,19 @@ public class Main {
                     }
                     String strResult = RegresiLinearBerganda.driverRegresi(parameterInput);
                     System.out.println(strResult);
+                    Menu.displayMenuOutput();
+                    System.out.println();
+                    System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                    int pilihanOutput;
+                    pilihanOutput = scanner.nextInt();
+                    while (pilihanOutput!=1 && pilihanOutput!=2){
+                        System.out.println("Masukan output tidak valid. Silakan ulangi");
+                        System.out.print("Masukkan pilihan output yang ingin dijalankan\t: ");
+                        pilihanOutput = scanner.nextInt();
+                    }
+                    if (pilihanOutput==1){
+                        IO.pWriteString(strResult);
+                    }
                 }
                 else if (pilihan==7){
                     System.out.println("Upgrade ke versi premium untuk menggunakan pilihan ini ˶ᵔ ᵕ ᵔ˶");
