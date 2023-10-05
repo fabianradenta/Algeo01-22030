@@ -253,7 +253,7 @@ public class Matrix {
 
     public Matrix inverseWithAdjoint(){
         if (this.rows==this.columns-1){
-            if (this.determinant()!=0 || this.determinant()==(Double) null){
+            if (this.determinant()!=0){
                 Matrix mHasil = new Matrix(getRows(), getColumns());
                 double constant = (1/this.determinant());
                 mHasil = this.adjoint().multiplyByConstant(constant);

@@ -395,8 +395,7 @@ public class Main {
                     else {
                         parameterInput = false;
                     }
-                    driverBicubic(parameterInput);
-
+                    BicubicSplineInterpolation.driverBicubic(parameterInput);
                 }
                 else if (pilihan==6){   //regresi linear berganda
                     int pilihanInput;
@@ -415,7 +414,7 @@ public class Main {
                     else {
                         parameterInput = false;
                     }
-                    driverRegresi(parameterInput);
+                    String strResult = RegresiLinearBerganda.driverRegresi(parameterInput);
                 }
                 else {
                     System.out.println();

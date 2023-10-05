@@ -15,7 +15,7 @@ public class Inverse{
 
 
         for (int i=0; i<A.getRows(); i++){
-            for (int j=0; j<A.getColumns(); j++){
+            for (int j=0; j<A.getColumns()-1; j++){
                 A.data[i][j] = m.data[i][j];
             }
         }
