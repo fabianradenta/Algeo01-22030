@@ -224,7 +224,6 @@ public class MetodeOBE {
                 fungsi = ("Sistem Persamaan Linear Ini Tidak Memiliki Solusi");
             }
         }
-        System.out.println(fungsi);
         return fungsi;
     }
 
@@ -265,7 +264,6 @@ public class MetodeOBE {
                 fungsi = ("Sistem Persamaan Linear ini Tidak Memiliki Solusi");
             }
         }
-        System.out.println(fungsi);
         return fungsi;
     }
 
