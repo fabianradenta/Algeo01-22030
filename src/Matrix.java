@@ -53,7 +53,7 @@ public class Matrix {
     public void displayMatrix(){
         for (int i=0; i<this.rows; i++){
             for (int j=0; j<this.columns; j++){
-                if (j==this.getLastIdxRow()){
+                if (j==this.getLastIdxCol()){
                     System.out.println(data[i][j]);
                 }
                 else {
