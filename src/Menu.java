@@ -80,7 +80,7 @@ public class Menu {
     // Thank You Menu
     public static void displayThanks() {
         System.out.println("=========================================================================");
-        System.out.println("                            Terima Kasih");
+        System.out.println("                             Terima Kasih");
         System.out.println("=========================================================================");
         System.out.println("===============================₊˚.⊹♡⊹.˚₊=================================");
     }
