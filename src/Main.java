@@ -1,11 +1,5 @@
 import java.util.*;
 
-import javax.lang.model.util.ElementScanner14;
-import javax.security.auth.Subject;
-import javax.xml.catalog.Catalog;
-
-// import com.apple.laf.AquaImageFactory.NineSliceMetrics;
-
 public class Main {
     public static void main(String[] args) {
         boolean running = true;
@@ -19,7 +13,7 @@ public class Main {
                 System.out.println();
                 System.out.print("Masukkan pilihan menu yang ingin dijalankan\t: ");
                 pilihan = scanner.nextInt();
-                while (pilihan<1 || pilihan>7){
+                while (pilihan<1 || pilihan>8){
                     System.out.println("Masukan tidak valid. Silakan ulangi");
                     System.out.print("Masukkan pilihan menu yang ingin dijalankan\t: ");
                     pilihan = scanner.nextInt();
@@ -67,7 +61,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            matr = InputOutput.readMatrixFromFile();
+                            IO.pReadMatrixFromFile(matr);
                             System.out.println();
                             System.out.println(MetodeOBE.gaussSPL(matr));
                         }
@@ -99,7 +93,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            matr = InputOutput.readMatrixFromFile();
+                            IO.pReadMatrixFromFile(matr);
                             System.out.println();
                             System.out.println(MetodeOBE.gaussJordanSPL(matr));
                         }
@@ -143,7 +137,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            matr = InputOutput.readMatrixFromFile();
+                            IO.pReadMatrixFromFile(matr);
                             if (matr.getRows()!=matr.getColumns()-1){
                                 System.out.println("Matriks dengan ukuran " + matr.getRows() + "x" + matr.getRows() + "tidak dapat dicari solusinya dengan metode matriks balikan");
                                 System.out.println();
@@ -189,7 +183,7 @@ public class Main {
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
-                            matr = InputOutput.readMatrixFromFile();
+                            IO.pReadMatrixFromFile(matr);
                             if (matr.getRows()!=matr.getColumns()-1){
                                 System.out.println("Matriks dengan ukuran " + matr.getRows() + "x" + matr.getRows() + "tidak dapat dicari solusinya dengan metode matriks balikan");
                                 System.out.println();
@@ -251,7 +245,7 @@ public class Main {
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        matr = InputOutput.readMatrixFromFile();
+                        IO.pReadMatrixFromFile(matr);
                         if (matr.rows!=matr.columns){
                             System.out.println("Matriks dengan ukuran " + matr.rows + "x" + matr.columns + " tidak memiliki determinan");
                             System.out.println();
@@ -329,7 +323,7 @@ public class Main {
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        matr = InputOutput.readMatrixFromFile();
+                        IO.pReadMatrixFromFile(matr);
                         if (matr.rows!=matr.columns){
                             System.out.println("Matriks dengan ukuran " + matr.rows + "x" + matr.columns + " tidak memiliki matriks balikan");
                             System.out.println();
@@ -377,7 +371,7 @@ public class Main {
                     }
                     else {
                         Matrix matr = new Matrix(0, 0);
-                        matr = InputOutput.readMatrixFromFile();
+                        IO.pReadMatrixFromFile(matr);
                         Double res = InterpolasiPolinom.polinomInterpolation(InterpolasiPolinom.matrixGenerator(matr));
                         String resStr = Double.toString(res);
                         System.out.print("Taksiran nilai f(x) pada titik tersebut adalah ");
@@ -424,6 +418,9 @@ public class Main {
                     String strResult = RegresiLinearBerganda.driverRegresi(parameterInput);
                     System.out.println(strResult);
                 }
+                else if (pilihan==7){
+                    System.out.println("Upgrade ke versi premium untuk menggunakan pilihan ini ˶ᵔ ᵕ ᵔ˶");
+                }
                 else {
                     System.out.println();
                     Menu.displayThanks();
@@ -434,7 +431,6 @@ public class Main {
                 System.out.println();
                 System.out.println("Masukan tidak valid. Silakan ulangi.");
                 scanner.nextLine();
-                System.out.println();
             }
         }
     }
