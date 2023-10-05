@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-public class InterpolasiPolinomial {
+public class InterpolasiPolinom {
 public static Matrix matrixGenerator(Matrix m)
     {
         int i, j;
