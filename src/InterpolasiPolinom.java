@@ -35,17 +35,16 @@ public class InterpolasiPolinom {
             String negative = String.format("%.4f", -m.data[i][m.getColumns() - 1]);
             String positive = String.format("%.4f", m.data[i][m.getColumns() - 1]);
             if (i == 0) {
-                    res += (m.data[i][m.getColumns() - 1] <= 0 ? " - " + negative : " + " + positive);
-                } else if (i == 1) {
-                    res += (m.data[i][m.getColumns() - 1] <= 0 ? " - " + negative : " + " + positive) + "x";
-                } else if (i == m.getRows() - 1) {
-                    res += (m.data[i][m.getColumns() - 1] <= 0 ? " - " + negative : " " + positive) + "x^" + i;
-                } else {
-                    res += (m.data[i][m.getColumns() - 1] <= 0 ? " - " + negative : " + " + positive) + "x^" + i;
-                }
+                res += (m.data[i][m.getColumns() - 1] <= 0 ? " - " + negative : " + " + positive);
+            } else if (i == 1) {
+                res += (m.data[i][m.getColumns() - 1] <= 0 ? " - " + negative : " + " + positive) + "x";
+            } else if (i == m.getRows() - 1) {
+                res += (m.data[i][m.getColumns() - 1] <= 0 ? " - " + negative : " " + positive) + "x^" + i;
+            } else {
+                res += (m.data[i][m.getColumns() - 1] <= 0 ? " - " + negative : " + " + positive) + "x^" + i;
+            }
         }
         System.out.println(res);
-        m.displayMatrix();
         System.out.println();
         
         System.out.println("Taksir nilai fungsi");
