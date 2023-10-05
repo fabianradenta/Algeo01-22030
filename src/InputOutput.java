@@ -75,13 +75,9 @@ public class InputOutput{
         }
     }
 
-    public static void writeMatrixToFile(Matrix m, String outputPath) {
-        System.out.println();
-        System.out.print("Apakah Anda ingin menyimpan hasil ke dalam sebuah file (Y/N)? ");
-        Scanner in = new Scanner(System.in);
-        String resp = (in.nextLine()).toUpperCase();
+    public static void writeMatrixToFile(Matrix m, String outputPath,int resp) {
         switch (resp) {
-            case "Y":
+            case 1:
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))) {
                     for (int i = 0; i < m.getRows(); i++) {
                         for (int j = 0; j < m.getColumns(); j++) {
@@ -98,64 +94,13 @@ public class InputOutput{
                     System.out.println("Gagal menyimpan file: " + e.getMessage());
                 }
                 break;
-            case "N":
+            case 2:
                 System.out.println("Anda tidak melakukan penyimpanan hasil.");
                 break;
             default:
                 System.out.println("Input tidak dikenali. Hasil tidak disimpan.");
                 break;
         }
-    }
-
-    public static Matrix createMatrix(boolean mustSquare) {
-        Menu.displayMenuInput();
-        int choice = -1;
-        switch (choice){
-            case 1:
-                return inputMatrixKeyboard(mustSquare);
-            case 2:
-                return inputMatrixFile(mustSquare);
-            default:
-                System.out.println("Input tidak dikenali.");
-                break;
-        }
-    }
-
-    // Bikin matrix dr keyboard
-    public static Matrix inputMatrixKeyboard(boolean mustSquare) {
-        int rows, cols;
-
-        while (true) {
-        if (mustSquare) {
-            System.out.println("Masukkan ukuran matriks");
-            System.out.print("> ");
-            rows = in.nextInt();
-            cols = rows;
-        } else {
-            System.out.println("Masukkan jumlah baris dan kolom matriks");
-            System.out.println("(Pisahkan dengan spasi)");
-            System.out.print("> ");
-            rows = in.nextInt();
-            cols = in.nextInt();
-        }
-        if (rows > 0 && cols > 0) {
-            break;
-        } else {
-            System.out.println("Masukan invalid. Jumlah baris dan kolom harus > 0");
-        }
-
-        Matrix matriks = new Matrix(rows, cols);
-        
-
-        System.out.println("Masukkan elemen matriks");
-        for (int i = 0; i < matriks.getRows(); i++) {
-            for (int j = 0; j < matriks.getColumns(); j++) {
-                System.out.print("Elemen baris ke-" + (i + 1) + " kolom ke-" + (j + 1) + ": ");
-                matriks.data[i][j] = in.nextDouble();
-            }
-        }
-
-        return matriks;
     }
 
     // Bikin matrix dr File

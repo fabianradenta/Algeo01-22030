@@ -40,7 +40,8 @@ public class Matrix {
         return this.data[i][i];
     }
 
-    public void readMatrix(Scanner scanner){
+    public void readMatrix(){
+        Scanner scanner = new Scanner(System.in);
         for (int i=0; i<this.rows; i++){
             for (int j=0; j<this.columns; j++){
                 this.data[i][j] = scanner.nextDouble();
@@ -52,7 +53,7 @@ public class Matrix {
     public void displayMatrix(){
         for (int i=0; i<this.rows; i++){
             for (int j=0; j<this.columns; j++){
-                if (j==this.getLastIdxCol()){
+                if (j==this.getLastIdxRow()){
                     System.out.println(data[i][j]);
                 }
                 else {
@@ -182,16 +183,15 @@ public class Matrix {
 
     public double determinant() {
         if (rows != columns) {
-            System.out.println("Determinant is only defined for square matrices.");
-            return Double.NaN; // Return Not-a-Number to indicate an error
+            return (Double) null;
         }
     
         if (rows == 1) {
-            return data[0][0]; // For a 1x1 matrix, the determinant is the only element
+            return data[0][0];
         }
     
         if (rows == 2) {
-            return data[0][0] * data[1][1] - data[0][1] * data[1][0]; // For a 2x2 matrix, use the formula
+            return data[0][0] * data[1][1] - data[0][1] * data[1][0];
         }
     
         double det = 0;
@@ -252,11 +252,16 @@ public class Matrix {
     
 
     public Matrix inverseWithAdjoint(){
-        if (this.determinant()!=0){
-            Matrix mHasil = new Matrix(getRows(), getColumns());
-            double constant = (1/this.determinant());
-            mHasil = this.adjoint().multiplyByConstant(constant);
-            return mHasil;
+        if (this.rows==this.columns-1){
+            if (this.determinant()!=0 || this.determinant()==(Double) null){
+                Matrix mHasil = new Matrix(getRows(), getColumns());
+                double constant = (1/this.determinant());
+                mHasil = this.adjoint().multiplyByConstant(constant);
+                return mHasil;
+            }
+            else {
+                return null;
+            }
         }
         else {
             return null;
@@ -276,7 +281,7 @@ public class Matrix {
     public Matrix splitMatrixHasil(){
         Matrix mHasil = new Matrix(getRows(), 1);
         for (int i = 0; i < getRows(); i++) {
-            mHasil.data[i][getRows()] = this.data[i][getRows()];
+            mHasil.data[i][0] = this.data[i][getRows()];
         }
         return mHasil;
     }
