@@ -43,7 +43,7 @@ public class RegresiLinearBerganda {
         }
         Matrix sampel = new Matrix(jmlSampel, jmlPengubah+1);
         System.out.println("Masukkan sampel data :");
-        sampel.readMatrix(sc);
+        sampel.readMatrix();
         // sampel.displayMatrix();
         return sampel;
     }

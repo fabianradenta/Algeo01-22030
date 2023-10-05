@@ -8,7 +8,7 @@ public class BicubicSplineInterpolation {
         String fungsi = new String();
         if (inputKeyboard) {
             System.out.println("Masukkan konfigurasi nilai fungsi dan turunan berarah disekitarnya :");
-            mSoal.readMatrix(sc);
+            mSoal.readMatrix();
         } else {
             Matrix tempmSoal = new Matrix(4,4);
             // tempmSoal = InputOutput.readMatrixFromFile();
