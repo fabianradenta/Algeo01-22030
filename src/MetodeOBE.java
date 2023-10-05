@@ -143,8 +143,12 @@ public class MetodeOBE {
         }
 
     // Algoritma untuk mendapatkan determinan
+        
         double det = 1;
         for (int i = 0; i < matriks.getRows() ; i++) {
+            if (i==matriks.columns){
+                break;
+            }
             det = det*matriks.data[i][i];
         }
         det = det*Math.pow((-1), jmlTukar);
