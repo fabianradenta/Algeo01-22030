@@ -2,8 +2,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class InterpolasiPolinomial {
-
-    public static Matrix matrixGenerator(Matrix m){
+public static Matrix matrixGenerator(Matrix m)
+    {
         int i, j;
         double a, b, val;
 
@@ -24,7 +24,7 @@ public class InterpolasiPolinomial {
         return newMatrix;
     }
 
-    public static double polinomInterpolation(Matrix m) throws IOException{
+    public static double polinomInterpolation(Matrix m){
         int i;
         double x;
         double hasil, xPangkat;
