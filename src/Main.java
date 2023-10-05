@@ -12,8 +12,8 @@ public class Main {
         int pilihan;
         Menu.displayWelcome();
         Scanner scanner = new Scanner(System.in);
-        try {
-            while (running){
+        while (running){
+            try {
                 System.out.println();
                 Menu.displayMainMenu();
                 System.out.println();
@@ -24,7 +24,7 @@ public class Main {
                     System.out.print("Masukkan pilihan menu yang ingin dijalankan\t: ");
                     pilihan = scanner.nextInt();
                 }
-                
+            
                 if (pilihan==1){    // spl
                     int pilihanSubMenu;
                     System.out.println();
@@ -63,13 +63,13 @@ public class Main {
                             Matrix matr = new Matrix(mGauss, nGauss);
                             matr.readMatrix();
                             System.out.println();
-                            MetodeOBE.gaussSPL(matr);   //mau diganti dari void jadi String supaya bisa di write ke file
+                            System.out.println(MetodeOBE.gaussSPL(matr));   //mau diganti dari void jadi String supaya bisa di write ke file
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
                             matr = InputOutput.readMatrixFromFile();
                             System.out.println();
-                            MetodeOBE.gaussSPL(matr);
+                            System.out.println(MetodeOBE.gaussSPL(matr));
                         }
 
                     }
@@ -95,13 +95,13 @@ public class Main {
                             Matrix matr = new Matrix(mGaussJordan, nGaussJordan);
                             matr.readMatrix();
                             System.out.println();
-                            MetodeOBE.gaussJordanSPL(matr);
+                            System.out.println(MetodeOBE.gaussJordanSPL(matr));
                         }
                         else {
                             Matrix matr = new Matrix(0, 0);
                             matr = InputOutput.readMatrixFromFile();
                             System.out.println();
-                            MetodeOBE.gaussJordanSPL(matr);
+                            System.out.println(MetodeOBE.gaussJordanSPL(matr));
                         }
                     }
                         
@@ -155,7 +155,7 @@ public class Main {
                             }
                         }
                     } 
-                    else {
+                    else {      // cramer
                         int pilihanInput;
                         Menu.displayMenuInput();
                         System.out.print("Masukkan pilihan input\t: ");
@@ -176,7 +176,7 @@ public class Main {
                                 matr.readMatrix();
                                 if (Kofaktor.cramer(matr)==null){
                                     //keluarkan pesan bahwa spl tidak dapat dihandle dengan metode ini
-                                    System.out.println("Sistem persamaan linear ini tidak dapat diselesaikan dengan metode matriks balikan");
+                                    System.out.println("Sistem persamaan linear ini tidak dapat diselesaikan dengan kaidah cramer");
                                 }
                                 else {
                                     // cetak solusi ke terminal
@@ -395,7 +395,8 @@ public class Main {
                     else {
                         parameterInput = false;
                     }
-                    BicubicSplineInterpolation.driverBicubic(parameterInput);
+                    String strResult =BicubicSplineInterpolation.driverBicubic(parameterInput);
+                    System.out.println(strResult);
                 }
                 else if (pilihan==6){   //regresi linear berganda
                     int pilihanInput;
@@ -415,6 +416,7 @@ public class Main {
                         parameterInput = false;
                     }
                     String strResult = RegresiLinearBerganda.driverRegresi(parameterInput);
+                    System.out.println(strResult);
                 }
                 else {
                     System.out.println();
@@ -422,11 +424,12 @@ public class Main {
                     running = false;
                     scanner.close();
                 }
+            } catch (InputMismatchException e){
+                System.out.println();
+                System.out.println("Masukan tidak valid. Silakan ulangi.");
+                scanner.nextLine();
+                System.out.println();
             }
-        } catch (Exception e){
-            System.out.println("Something went wrong.");
-        } finally {
-            System.out.println("end of program ");
         }
     }
 }
