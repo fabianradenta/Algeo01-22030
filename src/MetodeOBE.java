@@ -210,7 +210,7 @@ public class MetodeOBE {
         // Matriks singular
             boolean adaSolusi = true;
             matriksElimGaussJordan(matriks);
-            matriks.displayMatrix();
+            //matriks.displayMatrix();
             int i=matriks.getRows()-1;
             while (i >-1 && !cekAda1Utama(matriks, i) && adaSolusi) {
                 if (matriks.data[i][matriks.getColumns()-1] != 0) {
@@ -224,7 +224,7 @@ public class MetodeOBE {
                 fungsi = ("Sistem Persamaan Linear Ini Tidak Memiliki Solusi");
             }
         }
-        System.out.println(fungsi);
+        //System.out.println(fungsi);
         return fungsi;
     }
 
@@ -318,7 +318,7 @@ public class MetodeOBE {
                 idksolusi[j] = 1;
             }
         }
-        cetakSolusi(idksolusi);
+        //cetakSolusi(idksolusi);
         for (int i = 0; i < idksolusi.length; i++) {
             if (idksolusi[i] == 0) {
                 fungsi[i] = String.format("x%d = x%d",(i+1), (i+1));
