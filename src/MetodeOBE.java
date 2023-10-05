@@ -195,22 +195,14 @@ public class MetodeOBE {
         // Matriks augmented memiliki solusi unik
             matriksElimGauss(matriks);
             solusi = subtitusiMundur(matriks);
-            // cetakSolusi(solusi);
             for (int i = 0; i < solusi.length; i++) {
                 fungsi = fungsi + String.format("x%d = %f\n", (i+1), solusi [i]);
-                // System.out.print(solusi[i]);
-                // if (i != solusi.length-1) {
-                //     fungsi = fungsi + String.format(", ");
-                // } else {
-                //     fungsi = fungsi + String.format("\n");
-                // }
             }
             
         } else {
         // Matriks singular
             boolean adaSolusi = true;
             matriksElimGaussJordan(matriks);
-            //matriks.displayMatrix();
             int i=matriks.getRows()-1;
             while (i >-1 && !cekAda1Utama(matriks, i) && adaSolusi) {
                 if (matriks.data[i][matriks.getColumns()-1] != 0) {
@@ -240,9 +232,7 @@ public class MetodeOBE {
         det = determinanOBE(cekmatriks);
         if (matriks.getRows() == matriks.getColumns()-1 && det != 0) {
             matriksElimGaussJordan(matriks);
-            //matriks.displayMatrix();
             solusi = solusiGaussJordan(matriks);
-            //cetakSolusi(solusi);
             for (int i = 0; i < solusi.length; i++) {
                 fungsi = fungsi + String.format("x%d = %f\n", (i+1), solusi [i]);
             }
@@ -316,7 +306,6 @@ public class MetodeOBE {
                 idksolusi[j] = 1;
             }
         }
-        //cetakSolusi(idksolusi);
         for (int i = 0; i < idksolusi.length; i++) {
             if (idksolusi[i] == 0) {
                 fungsi[i] = String.format("x%d = x%d",(i+1), (i+1));
@@ -328,7 +317,6 @@ public class MetodeOBE {
                 fungsi[(satupertamakolom(matriks, i))] =String.format("x%d = %f " ,(satupertamakolom(matriks, i) +1), (matriks.data[i][matriks.getColumns()-1]));
                 //System.out.print("x"+(satupertamakolom(matriks, i) +1)+" = "+ matriks.data[i][matriks.getColumns()-1] + " ");
                 for (int j = satupertamakolom(matriks, i); j < matriks.getColumns() - 1; j++) {
-                    //int k = 0;
                     if (idksolusi[j] != 1) {
                         if (matriks.data[i][j] > 0) {
                             fungsi[(satupertamakolom(matriks, i))] = fungsi[(satupertamakolom(matriks, i))] + String.format("- %f*x%d " , (matriks.data[i][j]) ,  (j+1));
@@ -344,14 +332,7 @@ public class MetodeOBE {
         }
         String hasilparametrik = new String();
         for (int i = 0; i < fungsi.length; i++) {
-            // System.out.print("x" + (i + 1) + " = ");
-            // System.out.print(fungsi[i]);
             hasilparametrik = hasilparametrik + fungsi[i] + ("\n");
-            // if (i != fungsi.length-1) {
-            //     System.out.print("\n");
-            // } else {
-            //     System.out.println();
-            // }
         }
         return hasilparametrik;
     }
