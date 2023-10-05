@@ -91,7 +91,6 @@ public class RegresiLinearBerganda {
             }
         }
         fungsi = fungsi + String.format(") = %f\n", sum );
-        System.out.print(fungsi);
         return fungsi;
     }
 

@@ -629,7 +629,7 @@ public class Main {
                         pilihanInput = scanner.nextInt();
                     }
                     boolean parameterInput;
-                    if (pilihan==1){
+                    if (pilihanInput ==1){
                         parameterInput = true;
                     }
                     else {
