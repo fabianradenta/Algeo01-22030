@@ -1,17 +1,23 @@
 import java.util.Scanner;
 
 public class BicubicSplineInterpolation {
-    public static void main(String[] args) {
+    public static String driverBicubic(boolean inputKeyboard) {
         // ini masih input-an keyboard, untuk yang file belum
         Scanner sc = new Scanner(System.in);
         Matrix mSoal = new Matrix(4,4);
-        System.out.println();
-        System.out.println("Masukkan konfigurasi nilai fungsi dan turunan berarah disekitarnya");
-        mSoal.readMatrix(sc);
-        //matriksBicubicSpline(mSoal);
+        String fungsi = new String();
+        if (inputKeyboard) {
+            System.out.println("Masukkan konfigurasi nilai fungsi dan turunan berarah disekitarnya :");
+            mSoal.readMatrix(sc);
+        } else {
+            Matrix tempmSoal = new Matrix(4,4);
+            // tempmSoal = InputOutput.readMatrixFromFile();
+            mSoal = tempmSoal;
+        }
         System.out.println("Masukkan nilai f(x,y) yang mau ditaksir :");
         double xSoal = sc.nextDouble();
         double ySoal = sc.nextDouble();
+
         Matrix mSoalBicubic = new Matrix(4*mSoal.getRows(), 1);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -24,9 +30,13 @@ public class BicubicSplineInterpolation {
         inversBicubic.pMultiplyMatrix(mSoalBicubic);
         //inversBicubic.displayMatrix();
         //MetodeOBE.cetakMatriks(invers);
+        
         double hasil = solusiBicubic(inversBicubic, xSoal, ySoal);
+        fungsi = String.format("f(%f,%f) = %f", xSoal,ySoal,hasil );
+        
         //System.out.println("hahahaha");
-        System.out.println(hasil);
+        System.out.println(fungsi);
+        return fungsi;
 
     }
 

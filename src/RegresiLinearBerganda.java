@@ -6,13 +6,17 @@ public class RegresiLinearBerganda {
         Matrix sampel = new Matrix(0, 0);
         double[] soal = new double[sampel.getColumns()-1];
         if (inputKeyboard) { //masukan dari keyboard
-            sampel = inputRegresiKeyboard();
+            Matrix tempsampel = new Matrix(0, 0);
+            tempsampel = inputRegresiKeyboard();
             System.out.println("Masukkan nilai yang mau ditaksir :");
             MetodeOBE.bacaArray(soal);
+            sampel = tempsampel;
         } else { // masukkan dari file
-            sampel = InputOutput.readMatrixFromFile();
+            Matrix tempsampel = new Matrix(0, 0);
+            tempsampel = InputOutput.readMatrixFromFile();
             System.out.println("Masukkan nilai yang mau ditaksir :");
             MetodeOBE.bacaArray(soal);
+            sampel = tempsampel;
         }
         
         String fungsi = prosesRegresi(sampel, soal);
