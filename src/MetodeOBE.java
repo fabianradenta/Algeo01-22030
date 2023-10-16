@@ -326,7 +326,7 @@ public class MetodeOBE {
                             fungsi[(satupertamakolom(matriks, i))] = fungsi[(satupertamakolom(matriks, i))] + String.format("- %f*x%d " , (matriks.data[i][j]) ,  (j+1));
                             //System.out.print("- " +matriks.data[i][j]+"*x" + (j+1) +" ");
                         } else if (matriks.data[i][j] < 0){
-                            fungsi[(satupertamakolom(matriks, i))] = fungsi[(satupertamakolom(matriks, i))] + String.format("+ %f*x%d " , (matriks.data[i][j]) ,  (j+1));
+                            fungsi[(satupertamakolom(matriks, i))] = fungsi[(satupertamakolom(matriks, i))] + String.format("+ %f*x%d " , (- matriks.data[i][j]) ,  (j+1));
                             //System.out.print("+ " +(-matriks.data[i][j])+"*x" + (j+1) +" ");
                         }                        
                     }
